@@ -52,7 +52,7 @@
 	"dependencies": {
 		"class-variance-authority": "^0.7.1",
 		"clsx": "^2.1.1",
-		"lucide-svelte": "^0.544.0",
+		"phosphor-svelte": "^3.0.1",
 		"svelte-inview": "^4.0.4",
 		"svelte-motion": "^0.12.2",
 		"tailwind-merge": "^3.3.1"
