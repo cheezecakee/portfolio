@@ -2,12 +2,12 @@
 	import BackgroundRippleEffect from '$lib/components/BackgroundRippleEffect/BackgroundRippleEffect.svelte';
 </script>
 
-<div class="relative min-h-screen overflow-hidden dark:bg-black">
+<div class="relative h-full overflow-hidden dark:bg-black">
 	<BackgroundRippleEffect />
 
 	<!-- Center text within the BackgroundRippleEffect area -->
 	<div
-		class="pointer-events-none absolute inset-0 bottom-1/2 z-30 flex w-full flex-col items-center justify-center"
+		class="pointer-events-none absolute inset-0 bottom-1 z-30 flex w-full flex-col items-center justify-center"
 	>
 		<div class="px-20 text-center md:px-0">
 			<h2
@@ -21,4 +21,3 @@
 		</div>
 	</div>
 </div>
-
