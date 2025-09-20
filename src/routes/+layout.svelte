@@ -2,6 +2,7 @@
 	import '../app.css';
 	import favicon from '$lib/assets/favicon.svg';
 	import ShimmerButton from '$lib/components/ui/shimmer-button/shimmer-button.svelte';
+	import Menu from '$lib/components/DockMenu/Menu.svelte';
 
 	let { children } = $props();
 </script>
@@ -30,6 +31,9 @@
 	<main class="flex-1">
 		{@render children?.()}
 	</main>
+
+	<!-- Dock Menu -->
+	<Menu />
 
 	<!-- Footer -->
 	<footer class="px-6 py-4 text-center text-sm text-neutral-400">
