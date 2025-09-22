@@ -32,11 +32,11 @@
 		{@render children?.()}
 	</main>
 
-	<!-- Dock Menu -->
+	<!-- Dock Menu - Pass page data -->
 	<Menu />
 
 	<!-- Footer -->
 	<footer class="px-6 py-4 text-center text-sm text-neutral-400">
-		&copy; {new Date().getFullYear()} My App. All rights reserved.
+		&copy; {new Date().getFullYear()} Cheezecake. All rights reserved.
 	</footer>
 </div>
