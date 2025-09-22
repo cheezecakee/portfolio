@@ -1,39 +1,102 @@
 <script lang="ts">
 	import { cn } from '$lib/utils';
-	import { Motion, useMotionValue, useSpring, useTransform } from 'svelte-motion';
+	import { onMount } from 'svelte';
+	import { browser } from '$app/environment';
+	import type { Snippet } from 'svelte';
 
-	export let magnification = 60;
-	export let distance = 160;
-	export let mouseX = 0;
-	let mint = useMotionValue(mouseX);
-	$: mint.set(mouseX);
-
-	let className: string | undefined = '';
-	export { className as class };
+	let {
+		label,
+		enableHover = true,
+		isActive = false,
+		className = '',
+		onHover,
+		onRegister,
+		onResize,
+		children
+	} = $props<{
+		label: string;
+		enableHover?: boolean;
+		isActive?: boolean;
+		className?: string;
+		onHover?: ((centerX: number, label: string) => void) | undefined;
+		onRegister?: ((centerX: number, label: string) => void) | undefined;
+		onResize?: (() => void) | undefined;
+		children: Snippet<[boolean, boolean]>;
+	}>();
 
 	let iconElement: HTMLDivElement;
+	let isHovered = $state(false);
 
-	let distanceCalc = useTransform(mint, (val: number) => {
-		const bounds = iconElement?.getBoundingClientRect() ?? { x: 0, width: 0 };
-		return val - bounds.x - bounds.width / 2;
+	function calculateAndRegisterPosition() {
+		if (!browser || !iconElement) return;
+
+		const bounds = iconElement.getBoundingClientRect();
+		const centerX = bounds.x + bounds.width / 2;
+		onRegister?.(centerX, label);
+	}
+
+	function handleMouseEnter() {
+		if (!enableHover) return;
+		isHovered = true;
+
+		if (!browser || !iconElement) return;
+		const bounds = iconElement.getBoundingClientRect();
+		const centerX = bounds.x + bounds.width / 2;
+		onHover?.(centerX, label);
+	}
+
+	function handleMouseLeave() {
+		isHovered = false;
+	}
+
+	onMount(() => {
+		// Initial position registration
+		calculateAndRegisterPosition();
+
+		// Set up ResizeObserver for when the icon or container changes size
+		const resizeObserver = new ResizeObserver(() => {
+			calculateAndRegisterPosition();
+		});
+
+		// Observe both the icon element and its parent container
+		resizeObserver.observe(iconElement);
+		if (iconElement.parentElement) {
+			resizeObserver.observe(iconElement.parentElement);
+		}
+
+		// Listen for window resize events as a fallback
+		function handleWindowResize() {
+			// Small delay to ensure layout has settled
+			setTimeout(() => {
+				onResize?.();
+				calculateAndRegisterPosition();
+			}, 50);
+		}
+
+		window.addEventListener('resize', handleWindowResize);
+
+		return () => {
+			resizeObserver.disconnect();
+			window.removeEventListener('resize', handleWindowResize);
+		};
 	});
 
-	let widthSync = useTransform(distanceCalc, [-distance, 0, distance], [38, magnification, 38]);
-
-	let width = useSpring(widthSync, {
-		mass: 0.1,
-		stiffness: 150,
-		damping: 12
-	});
-
-	let iconClass = cn(
-		'flex aspect-square cursor-pointer items-center justify-center rounded-full',
-		className
+	let iconClass = $derived(
+		cn(
+			'flex aspect-square cursor-pointer items-center justify-center rounded-full w-[38px] h-[38px] transition-all duration-200',
+			{ 'bg-zinc-900/50': isActive },
+			className
+		)
 	);
 </script>
 
-<Motion style={{ width: width }} let:motion>
-	<div use:motion bind:this={iconElement} class={iconClass}>
-		<slot></slot>
-	</div>
-</Motion>
+<div
+	bind:this={iconElement}
+	class={iconClass}
+	role="button"
+	tabindex="0"
+	onmouseenter={handleMouseEnter}
+	onmouseleave={handleMouseLeave}
+>
+	{@render children(isHovered, isActive)}
+</div>
