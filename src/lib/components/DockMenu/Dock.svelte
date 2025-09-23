@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { Motion } from 'svelte-motion';
+	import { MediaQuery } from 'svelte/reactivity';
 	import { cva } from 'class-variance-authority';
 	import { cn } from '$lib/utils';
 	import Lamp from './Lamp.svelte';
@@ -8,6 +9,7 @@
 	import { browser } from '$app/environment';
 
 	let currentPage = $derived(page.url.pathname);
+	const isDesktop = new MediaQuery('(min-width: 640px)');
 
 	let {
 		className = undefined,
@@ -139,7 +141,10 @@
 			onmouseenter={handleMouseEnter}
 			onmouseleave={handleMouseLeave}
 		>
-			<Lamp isActive={true} posX={lampX ?? 0} />
+			{#if isDesktop.current}
+				<Lamp isActive={true} posX={lampX ?? 0} />
+			{/if}
+			<!-- <Lamp isActive={true} posX={lampX ?? 0} className="hidden sm:block" /> -->
 			{@render children?.({
 				onHover: handleIconHover,
 				onRegister: handleIconRegister,
