@@ -13,7 +13,9 @@
 
 <div class="dark flex min-h-screen flex-col bg-black text-white">
 	<!-- Header -->
-	<header class="relative z-50 flex items-center justify-between px-5 py-5 md:px-30">
+	<header
+		class="fixed z-50 flex w-full items-center justify-between bg-linear-to-b from-black to-transparent px-5 py-5 md:px-30"
+	>
 		<!-- Left side (button) -->
 		<div></div>
 
@@ -28,17 +30,19 @@
 	</header>
 
 	<!-- Main content -->
-	<main class="flex-1 overflow-y-auto pb-20">
+	<main class="flex-1 overflow-y-auto pt-20 pb-40">
 		{@render children?.()}
 	</main>
 
 	<!-- Dock Menu - Pass page data -->
-	<div class="fixed bottom-0 left-1/2 z-50 -translate-x-1/2 pb-15">
+	<div
+		class="fixed bottom-10 left-1/2 z-50 w-full -translate-x-1/2 bg-linear-to-b from-transparent to-black"
+	>
 		<Menu />
 	</div>
 
 	<!-- Footer -->
-	<footer class="px-6 py-4 text-center text-sm text-neutral-400">
+	<footer class="fixed bottom-0 w-full bg-black pb-5 text-center text-sm text-neutral-400">
 		&copy; {new Date().getFullYear()} Cheezecake. All rights reserved.
 	</footer>
 </div>
