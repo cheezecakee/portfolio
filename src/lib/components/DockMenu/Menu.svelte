@@ -54,7 +54,8 @@
 
 <Tooltip.Provider>
 	<div
-		class="relative flex w-full flex-col items-center justify-center overflow-hidden rounded-lg bg-gradient-to-b from-transparent via-background to-transparent md:shadow-xl"
+		class="relative flex w-full flex-col items-center justify-center overflow-hidden rounded-lg
+		bg-gradient-to-t from-black/50 via-transparent to-transparent"
 	>
 		<Dock direction="middle" className="relative">
 			{#snippet children({
