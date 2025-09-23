@@ -33,7 +33,7 @@
 	</main>
 
 	<!-- Dock Menu - Pass page data -->
-	<div class="fixed bottom-15 left-1/2 z-50 -translate-x-1/2">
+	<div class="fixed bottom-0 left-1/2 z-50 -translate-x-1/2 pb-15">
 		<Menu />
 	</div>
 
