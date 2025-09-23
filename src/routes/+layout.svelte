@@ -28,12 +28,14 @@
 	</header>
 
 	<!-- Main content -->
-	<main class="flex-1">
+	<main class="flex-1 overflow-y-auto pb-20">
 		{@render children?.()}
 	</main>
 
 	<!-- Dock Menu - Pass page data -->
-	<Menu />
+	<div class="fixed bottom-15 left-1/2 z-50 -translate-x-1/2">
+		<Menu />
+	</div>
 
 	<!-- Footer -->
 	<footer class="px-6 py-4 text-center text-sm text-neutral-400">
