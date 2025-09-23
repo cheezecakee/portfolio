@@ -60,11 +60,13 @@
 			{#snippet children({
 				onHover,
 				onRegister,
-				onResize
+				onResize,
+				isAnyIconHovered
 			}: {
 				onHover: (centerX: number, label: string) => void;
 				onRegister: (centerX: number, label: string) => void;
 				onResize: () => void;
+				isAnyIconHovered: boolean;
 			})}
 				{#each navigationConfig.navbar as navItem (navItem.label)}
 					{@const Icon = navItem.icon}
@@ -81,13 +83,19 @@
 						{#snippet children(isHovered, iconIsActive)}
 							<Tooltip.Root>
 								<Tooltip.Trigger
-									class={`flex h-full w-full items-center justify-center transition-all duration-200 ${
-										isHovered ? 'scale-110' : ''
-									} ${iconIsActive ? 'rounded-full bg-white/10' : ''}`}
+									class={`flex h-full w-full items-center justify-center transition-all duration-200
+		${
+			isHovered
+				? 'scale-110 rounded-full bg-white/20'
+				: iconIsActive && !isAnyIconHovered
+					? 'rounded-full bg-white/10'
+					: ''
+		}`}
 									onclick={() => handleNavigationClick(navItem)}
 								>
 									<Icon size={22} class="text-white" />
 								</Tooltip.Trigger>
+
 								<Tooltip.Content sideOffset={8}><p>{navItem.label}</p></Tooltip.Content>
 							</Tooltip.Root>
 						{/snippet}
@@ -110,13 +118,19 @@
 						{#snippet children(isHovered, iconIsActive)}
 							<Tooltip.Root>
 								<Tooltip.Trigger
-									class={`flex h-full w-full items-center justify-center transition-all duration-200 ${
-										isHovered ? 'scale-110' : ''
-									}`}
+									class={`flex h-full w-full items-center justify-center transition-all duration-200
+		${
+			isHovered
+				? 'scale-110 rounded-full bg-white/20'
+				: iconIsActive && !isAnyIconHovered
+					? 'rounded-full bg-white/10'
+					: ''
+		}`}
 									onclick={() => handleNavigationClick(contactItem)}
 								>
-									<Icon size={20} class="text-white" />
+									<Icon size={22} class="text-white" />
 								</Tooltip.Trigger>
+
 								<Tooltip.Content sideOffset={9}><p>{contactItem.label}</p></Tooltip.Content>
 							</Tooltip.Root>
 						{/snippet}
@@ -134,7 +148,7 @@
 			<p>This is a modal for {activeModalId}</p>
 			<button
 				onclick={closeModal}
-				class="mt-4 rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
+				class="mt-4 rounded bg-black px-4 py-2 text-white hover:bg-black"
 			>
 				Close
 			</button>

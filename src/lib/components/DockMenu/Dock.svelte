@@ -22,6 +22,7 @@
 					onHover: (centerX: number, label: string) => void;
 					onRegister: (centerX: number, label: string) => void;
 					onResize: () => void;
+					isAnyIconHovered: boolean;
 				}
 			]
 		>;
@@ -142,7 +143,8 @@
 			{@render children?.({
 				onHover: handleIconHover,
 				onRegister: handleIconRegister,
-				onResize: handleGlobalResize
+				onResize: handleGlobalResize,
+				isAnyIconHovered: isHoveringDock
 			})}
 		</div>
 	</div>

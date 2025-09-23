@@ -84,7 +84,6 @@
 	let iconClass = $derived(
 		cn(
 			'flex aspect-square cursor-pointer items-center justify-center rounded-full w-[38px] h-[38px] transition-all duration-200',
-			{ 'bg-zinc-900/50': isActive },
 			className
 		)
 	);
