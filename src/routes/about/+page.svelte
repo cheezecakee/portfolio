@@ -4,6 +4,7 @@
 	import BentoTechStack from '$lib/components/BentoGrid/about/BentoTechStack.svelte';
 	import { techCategories } from '$lib/components/BentoGrid/about/techStackData';
 	import BentoOrbital from '$lib/components/BentoGrid/about/BentoOrbital.svelte';
+	import { ShineButton } from '$lib/components/ui/shine-button';
 
 	// Sample description for the about section
 	const aboutDescription =
@@ -41,4 +42,5 @@
 			<BentoOrbital />
 		</div>
 	</BentoGrid>
+	<ShineButton>Test</ShineButton>
 </div>
