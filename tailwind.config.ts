@@ -6,7 +6,6 @@ const config: Config = {
   darkMode: "class",
   theme: {
     extend: {
-      // No animations/keyframes here anymore
     },
   },
   plugins: [addVariablesForColors],
