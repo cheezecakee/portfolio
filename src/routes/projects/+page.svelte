@@ -1,108 +1,91 @@
 <script lang="ts">
-	// Projects page component
-	const projects = [
-		{
-			title: 'Portfolio Website',
-			description:
-				'A modern portfolio built with SvelteKit and Tailwind CSS featuring a floating dock navigation.',
-			tech: ['SvelteKit', 'TypeScript', 'Tailwind CSS'],
-			status: 'In Progress'
-		},
-		{
-			title: 'Task Management App',
-			description:
-				'A modular task management application with drag-and-drop functionality and real-time updates.',
-			tech: ['Svelte', 'Firebase', 'TypeScript'],
-			status: 'Planning'
-		},
-		{
-			title: 'Weather Dashboard',
-			description:
-				'A responsive weather dashboard with location-based forecasts and interactive charts.',
-			tech: ['JavaScript', 'Chart.js', 'CSS Grid'],
-			status: 'Completed'
-		}
-	];
+	import BentoGrid from '$lib/components/BentoGrid/BentoGrid.svelte';
+	import BentoCards from '$lib/components/BentoGrid/projects/BentoCards.svelte';
+	import type { PageData } from './$types';
 
-	function getStatusColor(status: string) {
-		switch (status) {
-			case 'Completed':
-				return 'bg-green-500/20 text-green-400 border-green-500/30';
-			case 'In Progress':
-				return 'bg-blue-500/20 text-blue-400 border-blue-500/30';
-			case 'Planning':
-				return 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30';
-			default:
-				return 'bg-gray-500/20 text-gray-400 border-gray-500/30';
-		}
-	}
+	export let data: PageData;
+
+	$: ({ projects, meta } = data);
 </script>
 
 <svelte:head>
-	<title>Projects - Your Portfolio</title>
+	<title>Projects</title>
 	<meta name="description" content="Explore my development projects and coding journey." />
 </svelte:head>
 
-<div class="container mx-auto px-6 py-12">
-	<div class="mx-auto max-w-6xl">
-		<h1 class="mb-8 text-center text-4xl font-bold text-white">My Projects</h1>
-		<p class="mx-auto mb-12 max-w-2xl text-center text-lg text-gray-300">
-			Here's a collection of projects I've been working on. Each one represents a step forward in my
-			development journey.
-		</p>
+<div class="mx-auto flex flex-col items-center justify-center space-y-6 px-5 md:px-30 lg:px-80">
+	<div class="w-full space-y-2">
+		<span
+			class="pointer-events-none w-full bg-gradient-to-b from-gray-100 to-gray-300/80 bg-clip-text px-5 text-start text-3xl leading-none font-semibold whitespace-pre-wrap text-transparent dark:from-gray-100 dark:to-gray-300/50"
+		>
+			Projects
+		</span>
 
-		<div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-			{#each projects as project}
-				<div
-					class="rounded-lg border border-zinc-800 bg-zinc-900 p-6 transition-all duration-300 hover:scale-105 hover:transform hover:border-zinc-700"
-				>
-					<div class="mb-4 flex items-start justify-between">
-						<h3 class="text-xl font-semibold text-white">{project.title}</h3>
-						<span class="rounded-full border px-3 py-1 text-xs {getStatusColor(project.status)}">
-							{project.status}
-						</span>
-					</div>
-
-					<p class="mb-4 text-sm leading-relaxed text-gray-300">
-						{project.description}
-					</p>
-
-					<div class="space-y-3">
-						<h4 class="text-sm font-medium text-gray-400">Technologies:</h4>
-						<div class="flex flex-wrap gap-2">
-							{#each project.tech as tech}
-								<span
-									class="rounded border border-zinc-700 bg-zinc-800 px-2 py-1 text-xs text-white"
-								>
-									{tech}
-								</span>
-							{/each}
-						</div>
-					</div>
-
-					<div class="mt-6 flex gap-3">
-						<button
-							class="rounded bg-blue-600 px-4 py-2 text-sm text-white transition-colors hover:bg-blue-700"
-						>
-							View Project
-						</button>
-						<button
-							class="rounded border border-zinc-700 px-4 py-2 text-sm text-white transition-colors hover:border-zinc-600"
-						>
-							Source Code
-						</button>
-					</div>
-				</div>
-			{/each}
-		</div>
-
-		<div class="mt-12 text-center">
-			<p class="mb-4 text-gray-400">More projects coming soon!</p>
-			<button
-				class="rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 px-6 py-3 font-medium text-white transition-all hover:from-purple-700 hover:to-blue-700"
-			>
-				View All on GitHub
-			</button>
-		</div>
+		{#if meta?.error}
+			<p class="px-5 text-sm text-neutral-500 dark:text-neutral-400">
+				Unable to load projects from GitHub. Please try again later.
+			</p>
+		{:else if projects.length > 0}
+			<p class="px-5 text-sm text-neutral-600 dark:text-neutral-400">
+				<!-- Showcasing {projects.length} of my recent public repositories -->
+			</p>
+		{/if}
 	</div>
+
+	{#if projects.length > 0}
+		<!-- Use your existing BentoGrid component -->
+		<BentoGrid class="w-full gap-6">
+			{#each projects as project (project.id)}
+				<BentoCards {project} />
+			{/each}
+		</BentoGrid>
+
+		<!-- Link to full GitHub profile -->
+		<div class="w-full pt-4 text-center">
+			<a
+				href="https://github.com/cheezecakee?tab=repositories"
+				target="_blank"
+				rel="noopener noreferrer"
+				class="inline-flex items-center text-sm text-neutral-600 transition-colors hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100"
+			>
+				View all projects on GitHub
+				<svg class="ml-1 h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+					<path
+						fill-rule="evenodd"
+						d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+						clip-rule="evenodd"
+					/>
+				</svg>
+			</a>
+		</div>
+	{:else}
+		<!-- Empty state inside BentoGrid to maintain layout -->
+		<BentoGrid class="w-full gap-6">
+			<div
+				class="col-span-full flex min-h-[400px] w-full flex-col items-center justify-center space-y-4 rounded-xl border border-dashed border-neutral-200 dark:border-neutral-800"
+			>
+				<svg
+					class="h-12 w-12 text-neutral-400"
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke="currentColor"
+				>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						stroke-width="1.5"
+						d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-4m-5 0H3m0 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
+					/>
+				</svg>
+				<div class="text-center">
+					<h3 class="text-lg font-medium text-neutral-900 dark:text-neutral-100">
+						No projects found
+					</h3>
+					<p class="mt-1 text-sm text-neutral-500 dark:text-neutral-400">
+						Projects will appear here once they're available.
+					</p>
+				</div>
+			</div>
+		</BentoGrid>
+	{/if}
 </div>
