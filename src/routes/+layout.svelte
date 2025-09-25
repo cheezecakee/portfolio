@@ -14,7 +14,7 @@
 <div class="dark flex min-h-screen flex-col bg-black text-white">
 	<!-- Header -->
 	<header
-		class="fixed z-50 flex w-full items-center justify-between bg-linear-to-b from-black to-transparent px-5 py-5 md:px-30"
+		class="fixed z-50 flex w-full items-center justify-between bg-linear-to-b from-black to-transparent px-5 py-5 md:px-30 lg:px-60"
 	>
 		<!-- Left side (button) -->
 		<div></div>
