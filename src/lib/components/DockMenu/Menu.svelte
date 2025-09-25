@@ -55,7 +55,7 @@
 <Tooltip.Provider>
 	<div
 		class="relative flex w-full flex-col items-center justify-center overflow-hidden rounded-lg
-		bg-gradient-to-t from-black/50 via-transparent to-transparent pb-10"
+		bg-gradient-to-t from-black/50 via-transparent to-transparent pb-5"
 	>
 		<Dock direction="middle" className="relative">
 			{#snippet children({
