@@ -42,5 +42,4 @@
 			<BentoOrbital />
 		</div>
 	</BentoGrid>
-	<ShineButton>Test</ShineButton>
 </div>
