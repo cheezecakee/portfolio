@@ -1,6 +1,7 @@
 <script lang="ts">
 	import BentoGrid from '$lib/components/BentoGrid/BentoGrid.svelte';
 	import BentoCards from '$lib/components/BentoGrid/projects/BentoCards.svelte';
+	import MagicCard from '$lib/components/ui/magic-card/MagicCard.svelte';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
@@ -33,10 +34,9 @@
 	</div>
 
 	{#if projects.length > 0}
-		<!-- Use your existing BentoGrid component -->
 		<BentoGrid class="w-full gap-6">
 			{#each projects as project (project.id)}
-				<BentoCards {project} />
+				<BentoCards {project} background={MagicCard} />
 			{/each}
 		</BentoGrid>
 
