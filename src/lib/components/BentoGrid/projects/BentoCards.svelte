@@ -1,5 +1,4 @@
 <script lang="ts">
-	// import Button from '$lib/components/ui/button/button.svelte';
 	import { ShineButton } from '$lib/components/ui/shine-button';
 	import { cn } from '$lib/utils';
 	import type { ProcessedProject } from '../../../../routes/projects/+page.server';
@@ -7,12 +6,13 @@
 	let className: string = '';
 	export { className as class };
 	export let project: ProcessedProject;
+	export let background: any = null;
 
 	// State for description expansion
 	let isDescriptionExpanded = false;
 
 	// Configuration for description truncation
-	const MAX_DESCRIPTION_LENGTH = 120; // Adjust this value as needed
+	const MAX_DESCRIPTION_LENGTH = 120;
 	const shouldTruncateDescription = project.description.length > MAX_DESCRIPTION_LENGTH;
 	const truncatedDescription = shouldTruncateDescription
 		? project.description.slice(0, MAX_DESCRIPTION_LENGTH).trim() + '...'
@@ -24,28 +24,31 @@
 </script>
 
 <div
-	id={project.title}
 	class={cn(
-		'group relative col-span-1 flex min-h-[280px] flex-col overflow-hidden rounded-xl',
-		// light styles
-		'bg-white [box-shadow:0_0_0_1px_rgba(0,0,0,.03),0_2px_4px_rgba(0,0,0,.05),0_12px_24px_rgba(0,0,0,.05)]',
-		// dark styles
-		'transform-gpu dark:bg-black dark:[box-shadow:0_-20px_80px_-20px_#ffffff1f_inset] dark:[border:1px_solid_rgba(255,255,255,.1)]',
+		'group relative col-span-1 flex min-h-[280px] flex-col overflow-hidden rounded-xl border transition-colors',
+		'border-transparent bg-white [box-shadow:0_0_0_1px_rgba(0,0,0,.03),0_2px_4px_rgba(0,0,0,.05),0_12px_24px_rgba(0,0,0,.05)]',
+		'dark:bg-black dark:[box-shadow:0_-20px_80px_-20px_#ffffff1f_inset] dark:[border:1px_solid_rgba(255,255,255,.1)]',
+		'hover:border-white dark:hover:border-white',
 		className
 	)}
 >
-	<!-- Main content with consistent layout -->
+	<!-- Background layer -->
+	{#if background}
+		<svelte:component this={background} />
+	{/if}
+
+	<!-- Content layer -->
 	<div
-		class="pointer-events-none z-10 flex flex-1 transform-gpu flex-col p-6 transition-all duration-300 group-hover:-translate-y-2"
+		class="pointer-events-none relative z-10 flex flex-1 transform-gpu flex-col p-6 transition-all duration-300 group-hover:-translate-y-2"
 	>
-		<!-- Header section - Title -->
+		<!-- Header -->
 		<div class="mb-4">
 			<h3 class="text-xl font-semibold text-neutral-700 dark:text-neutral-300">
 				{project.title}
 			</h3>
 		</div>
 
-		<!-- Description section - Fixed height area -->
+		<!-- Description -->
 		<div class="mb-6 flex-1">
 			<p class="text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">
 				{isDescriptionExpanded ? project.description : truncatedDescription}
@@ -61,7 +64,7 @@
 			{/if}
 		</div>
 
-		<!-- Technologies section - Always in same position -->
+		<!-- Technologies -->
 		{#if project.languages.length > 0}
 			<div class="mb-4 space-y-3">
 				<h4
@@ -81,7 +84,7 @@
 			</div>
 		{/if}
 
-		<!-- Stats section - Always at bottom of content area -->
+		<!-- Stats -->
 		{#if project.stats.stars > 0 || project.stats.forks > 0}
 			<div class="flex items-center gap-4 text-xs text-neutral-500 dark:text-neutral-400">
 				{#if project.stats.stars > 0}
@@ -112,7 +115,6 @@
 
 	<!-- Action section - Always at bottom -->
 	<div class="flex w-full flex-row items-center p-4 dark:border-neutral-800">
-		<!-- <Button variant="ghost" size="sm"> -->
 		<ShineButton>
 			<a
 				href={project.href}
@@ -143,6 +145,6 @@
 
 	<!-- Hover overlay -->
 	<div
-		class="pointer-events-none absolute inset-0 transform-gpu transition-all duration-300 group-hover:bg-black/[.03] group-hover:dark:bg-neutral-800/10"
+		class="pointer-events-none absolute inset-0 z-5 transform-gpu transition-all duration-300 group-hover:bg-black/[.03] group-hover:dark:bg-neutral-800/10"
 	></div>
 </div>
