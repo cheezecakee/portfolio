@@ -1,8 +1,18 @@
 <script lang="ts">
 	import '../app.css';
 	import favicon from '$lib/assets/favicon.svg';
-	import ShimmerButton from '$lib/components/ui/shimmer-button/shimmer-button.svelte';
+	import ShimmerButton from '$lib/components/ui/shimmer-button/ShimmerButton.svelte';
 	import Menu from '$lib/components/DockMenu/Menu.svelte';
+	import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
+
+	import resumeEn from '$lib/assets/resume/resume.pdf';
+	import resumePt from '$lib/assets/resume/resume-portuguese.pdf';
+
+	let open = false;
+
+	function toggle() {
+		open = !open;
+	}
 
 	let { children } = $props();
 </script>
@@ -20,13 +30,29 @@
 		<div></div>
 
 		<!-- Right side -->
-		<ShimmerButton class="shadow-2xl">
-			<span
-				class="text-center text-sm leading-none font-medium tracking-tight whitespace-pre-wrap text-white lg:text-lg dark:from-white dark:to-slate-900/10"
+		<DropdownMenu.Root>
+			<DropdownMenu.Trigger>
+				<ShimmerButton class="shadow-2xl" on:click={toggle}>
+					<span
+						class="text-center text-sm leading-none font-medium tracking-tight whitespace-pre-wrap text-white lg:text-lg dark:from-white dark:to-slate-900/10"
+					>
+						Resume
+					</span>
+				</ShimmerButton>
+			</DropdownMenu.Trigger>
+			<DropdownMenu.Content
+				class=" border-none border-black bg-slate-900/10 text-center text-sm leading-none font-medium tracking-tight text-white lg:text-lg "
 			>
-				Resume
-			</span>
-		</ShimmerButton>
+				<DropdownMenu.Group>
+					<DropdownMenu.Item>
+						<a href={resumeEn} target="_blank" rel="noopener noreferrer">Resume - English</a>
+					</DropdownMenu.Item>
+					<DropdownMenu.Item>
+						<a href={resumePt} target="_blank" rel="noopener noreferrer">Resume - Portuguese</a>
+					</DropdownMenu.Item>
+				</DropdownMenu.Group>
+			</DropdownMenu.Content>
+		</DropdownMenu.Root>
 	</header>
 
 	<!-- Main content -->
