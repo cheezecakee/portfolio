@@ -1,3 +1,3 @@
-import ShimmerButton from './shimmer-button.svelte';
+import ShimmerButton from './ShimmerButton.svelte';
 
 export {ShimmerButton};

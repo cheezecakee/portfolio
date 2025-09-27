@@ -18,18 +18,18 @@
 	style:--cut={shimmerSize}
 	style:--bg={background}
 	class={cn(
-		'group relative z-0 flex cursor-pointer items-center justify-center overflow-hidden whitespace-nowrap border border-white/10 px-6 py-3 text-white [background:var(--bg)] [border-radius:var(--radius)] dark:text-white',
+		'group relative z-0 flex cursor-pointer items-center justify-center overflow-hidden [border-radius:var(--radius)] border border-white/10 px-6 py-3 whitespace-nowrap text-white [background:var(--bg)] dark:text-white',
 		'transform-gpu transition-transform duration-300 ease-in-out active:translate-y-[1px]',
 		className
 	)}
 >
-	<div class={cn('-z-30 blur-[2px]', 'absolute inset-0 overflow-visible [container-type:size]')}>
+	<div class={cn('-z-30 blur-[2px]', '[container-type:size] absolute inset-0 overflow-visible')}>
 		<div
-			class="animate-magicslide absolute inset-0 h-[100cqh] [aspect-ratio:1] [border-radius:0] [mask:none]"
+			class="animate-magicslide absolute inset-0 [aspect-ratio:1] h-[100cqh] [border-radius:0] [mask:none]"
 		>
 			<!--  spark before  -->
 			<div
-				class="animate-spin-around absolute inset-[-100%] w-auto rotate-0 [background:conic-gradient(from_calc(270deg-(var(--spread)*0.5)),transparent_0,var(--shimmer-color)_var(--spread),transparent_var(--spread))] [translate:0_0]"
+				class="animate-spin-around absolute inset-[-100%] w-auto [translate:0_0] rotate-0 [background:conic-gradient(from_calc(270deg-(var(--spread)*0.5)),transparent_0,var(--shimmer-color)_var(--spread),transparent_var(--spread))]"
 			></div>
 		</div>
 	</div>
@@ -54,7 +54,7 @@
 	<!-- backdrop -->
 	<div
 		class={cn(
-			'absolute -z-20 [background:var(--bg)] [border-radius:var(--radius)] [inset:var(--cut)]'
+			'absolute [inset:var(--cut)] -z-20 [border-radius:var(--radius)] [background:var(--bg)]'
 		)}
 	></div>
 </button>
