@@ -12,7 +12,7 @@
 
 <Dialog.Root bind:open>
 	<Dialog.Content
-		class="rounded-xl border border-white/10 bg-black p-6 shadow-[0_-20px_80px_-20px_rgba(255,255,255,0.12)_inset] sm:max-w-[425px]"
+		class="rounded-xl border border-white/10 bg-black p-6 text-gray-200 shadow-[0_-20px_80px_-20px_rgba(255,255,255,0.12)_inset] sm:max-w-[425px]"
 	>
 		<Dialog.Header class="mb-4">
 			<Dialog.Title
