@@ -2,7 +2,7 @@
 	import { Motion, useMotionValue, useMotionTemplate } from 'svelte-motion';
 	import { onMount } from 'svelte';
 
-	export let gradientSize: number = 200;
+	export let gradientSize: number = 400;
 	export let gradientColor: string = 'rgba(255, 255, 255, 0.1)';
 	export let gradientOpacity: number = 0.4;
 
