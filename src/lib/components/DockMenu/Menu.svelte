@@ -2,6 +2,7 @@
 	import { House, User, Code, GithubLogo, LinkedinLogo, EnvelopeSimple } from 'phosphor-svelte';
 	import * as Tooltip from '$lib/components/ui/tooltip';
 	import Separator from '$lib/components/ui/separator/separator.svelte';
+	import ContactModal from './contact/ContactModal.svelte';
 	import Dock from './Dock.svelte';
 	import DockIcon from './DockIcon.svelte';
 	import { goto } from '$app/navigation';
@@ -9,8 +10,14 @@
 	import type { Navs, NavItem, PageNav } from '$lib/types';
 	import * as NavURL from '$lib/constants/navigation';
 
+	interface Props {
+		data?: { form: any };
+	}
+
+	let { data }: Props = $props();
+
 	let currentPage = $derived(page.url.pathname);
-	let activeModalId = $state<string | null>(null);
+	let isContactModalOpen = $state(false);
 
 	const navigationConfig: Navs = {
 		navbar: [
@@ -34,21 +41,13 @@
 	}
 
 	function handleNavigationClick(item: NavItem) {
-		if (isPageNav(item)) goto(item.href);
-		else if (item.type === 'external') window.open(item.href, '_blank', 'noopener,noreferrer');
-		else if (item.type === 'modal') openModal(item.label);
-
-		// Reset activeModalId if navigating to a page
-		activeModalId = item.type === 'page' ? null : activeModalId;
-	}
-
-	function openModal(id: string) {
-		activeModalId = id;
-		setTimeout(() => closeModal(), 3000);
-	}
-
-	function closeModal() {
-		activeModalId = null;
+		if (isPageNav(item)) {
+			goto(item.href);
+		} else if (item.type === 'external') {
+			window.open(item.href, '_blank', 'noopener,noreferrer');
+		} else if (item.type === 'modal' && item.label === 'Email') {
+			isContactModalOpen = true;
+		}
 	}
 </script>
 
@@ -142,17 +141,4 @@
 	</div>
 </Tooltip.Provider>
 
-{#if activeModalId}
-	<div class="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-		<div class="rounded-lg bg-white p-6 text-black">
-			<h2 class="text-xl font-bold">Modal: {activeModalId}</h2>
-			<p>This is a modal for {activeModalId}</p>
-			<button
-				onclick={closeModal}
-				class="mt-4 rounded bg-black px-4 py-2 text-white hover:bg-black"
-			>
-				Close
-			</button>
-		</div>
-	</div>
-{/if}
+<ContactModal bind:open={isContactModalOpen} {data} />
