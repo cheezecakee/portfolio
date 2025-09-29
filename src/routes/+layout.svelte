@@ -3,6 +3,7 @@
 	import favicon from '$lib/assets/favicon.svg';
 	import ShimmerButton from '$lib/components/ui/shimmer-button/ShimmerButton.svelte';
 	import Menu from '$lib/components/DockMenu/Menu.svelte';
+	import { Toaster } from '$lib/components/ui/sonner';
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
 
 	import resumeEn from '$lib/assets/resume/resume.pdf';
@@ -14,7 +15,7 @@
 		open = !open;
 	}
 
-	let { children } = $props();
+	let { children, data } = $props();
 </script>
 
 <svelte:head>
@@ -64,11 +65,26 @@
 	<div
 		class="fixed bottom-10 left-1/2 z-50 w-full -translate-x-1/2 bg-linear-to-b from-transparent to-black"
 	>
-		<Menu />
+		<Menu {data} />
 	</div>
 
 	<!-- Footer -->
-	<footer class="fixed bottom-0 w-full bg-black pb-5 text-center text-sm text-neutral-400">
+	<footer class="fixed bottom-0 z-60 w-full bg-black pb-5 text-center text-sm text-neutral-400">
 		&copy; {new Date().getFullYear()} Cheezecake. All rights reserved.
 	</footer>
+
+	<!-- Toast Notifications -->
+	<Toaster
+		theme="dark"
+		class="toaster group"
+		toastOptions={{
+			classes: {
+				toast:
+					'group toast group-[.toaster]:bg-black group-[.toaster]:text-white group-[.toaster]:border-zinc-700 group-[.toaster]:shadow-lg',
+				description: 'group-[.toast]:text-neutral-400',
+				actionButton: 'group-[.toast]:bg-white group-[.toast]:text-black',
+				cancelButton: 'group-[.toast]:bg-neutral-800 group-[.toast]:text-white'
+			}
+		}}
+	/>
 </div>
