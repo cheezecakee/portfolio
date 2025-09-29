@@ -46,7 +46,7 @@
 	const { form: formData, enhance } = form;
 </script>
 
-<form method="POST" use:enhance class="space-y-4">
+<form method="POST" use:enhance class="space-y-2">
 	<!-- Name -->
 	<Form.Field {form} name="name">
 		<Form.Control>
@@ -60,7 +60,7 @@
 					{...props}
 					bind:value={$formData.name}
 					placeholder="Your name"
-					class="rounded-md border  border-zinc-700 bg-transparent text-gray-200"
+					class="block h-12 w-52 rounded-md border-1 border-double border-transparent bg-[linear-gradient(#000,#000),linear-gradient(to_right,#334454,#334454)] [background-clip:padding-box,_border-box] bg-origin-border px-3 py-2 text-slate-200 transition-all duration-500 placeholder:text-slate-500 focus:bg-[linear-gradient(#000,#000),linear-gradient(to_right,#c7d2fe,#8678f9)] focus:outline-none "
 				/>
 			{/snippet}
 		</Form.Control>
@@ -132,7 +132,18 @@
 		<Form.FieldErrors />
 	</Form.Field>
 
-	<Form.Button class="w-full">Send</Form.Button>
+	<Form.Button class="relative inline-flex w-full overflow-hidden rounded-xl p-px">
+		<span
+			class="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#c2c2c2_0%,#505050_50%,#bebebe_100%)]"
+		></span>
+		<span
+			class="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-[11px] bg-neutral-950 px-4 py-2 text-sm font-medium text-gray-50 backdrop-blur-3xl"
+		>
+			Send
+		</span>
+	</Form.Button>
 </form>
 
 <!-- <SuperDebug data={$formData} /> -->
+<style>
+</style>
