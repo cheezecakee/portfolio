@@ -13,39 +13,23 @@
 	)}
 >
 	<span
-		class="shiny-text relative block size-full text-sm tracking-wide text-[rgb(0,0,0,65%)] uppercase dark:font-light dark:text-[rgb(255,255,255,90%)]"
+		class="shiny-text relative block size-full text-sm font-light tracking-wide text-[rgb(0,0,0,65%)] uppercase dark:text-[rgb(255,255,255,90%)]"
 	>
 		{@render children()}
 	</span>
 </button>
 
 <style>
-	.shiny-text {
-		-webkit-mask-image: linear-gradient(
-			-75deg,
-			var(--primary, #007bff) calc(var(--x, 100%) + 20%),
-			transparent calc(var(--x, 100%) + 30%),
-			var(--primary, #007bff) calc(var(--x, 100%) + 100%)
-		);
-		mask-image: linear-gradient(
-			-75deg,
-			var(--primary, #007bff) calc(var(--x, 100%) + 20%),
-			transparent calc(var(--x, 100%) + 30%),
-			var(--primary, #007bff) calc(var(--x, 100%) + 100%)
-		);
-	}
-
-	/* Apply animation on button hover */
-	:where(button:hover) .shiny-text {
-		animation: shine 2s infinite linear;
+	:global(.animate-shine) {
+		animation: orbit calc(var(--duration) * 1s) linear infinite;
 	}
 
 	@keyframes shine {
 		from {
-			--x: 100%;
+			backgroundposition: '0 0';
 		}
 		to {
-			--x: -100%;
+			backgroundposition: '-200% 0';
 		}
 	}
 </style>

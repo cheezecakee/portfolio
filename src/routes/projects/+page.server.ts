@@ -31,12 +31,11 @@ export interface ProcessedProject {
 
 // Featured projects list - edit this array to control which projects are displayed
 const FEATURED_PROJECTS = [
+	'boba'
 	'mpris-daemon',
 	'hypesoft-challenge',
-	'fitrkr-cli',
 	'eww-notify-go',
 	'discordBot-speech-nlp',
-	'portfolio'
 ];
 
 async function fetchGitHubRepos(username: string): Promise<GitHubRepo[]> {
@@ -45,7 +44,7 @@ async function fetchGitHubRepos(username: string): Promise<GitHubRepo[]> {
 		type: 'public',
 		sort: 'updated',
 		direction: 'desc',
-		per_page: '100' // Increased to ensure we fetch all repos to find featured ones
+		per_page: '100' // Increased to ensure all repos are fetched to find featured ones
 	});
 
 	const response = await fetch(`${apiUrl}?${params}`, {
@@ -107,7 +106,6 @@ function extractLanguages(repo: GitHubRepo): string[] {
 		languages.push(repo.language);
 	}
 	
-	// Add topics as additional tech tags (GitHub topics are often technologies)
 	if (repo.topics && repo.topics.length > 0) {
 		languages.push(...repo.topics.slice(0, 3)); // Limit to avoid clutter
 	}
@@ -117,7 +115,7 @@ function extractLanguages(repo: GitHubRepo): string[] {
 
 export const load: PageServerLoad = async () => {
 	try {
-		const username = 'cheezecakee'; // Replace with your GitHub username
+		const username = 'cheezecakee';
 		const repos = await fetchGitHubRepos(username);
 		const projects = processRepoData(repos);
 

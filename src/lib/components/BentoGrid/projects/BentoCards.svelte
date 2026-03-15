@@ -120,7 +120,7 @@
 				href={project.href}
 				target="_blank"
 				rel="noopener noreferrer"
-				class="flex items-center justify-center"
+				class="hover: animate-shine text-md flex items-center justify-center bg-[linear-gradient(110deg,#939393,45%,#1e2631,55%,#939393)] bg-[length:200%_100%] bg-clip-text font-medium text-transparent"
 			>
 				View Project
 				<svg
