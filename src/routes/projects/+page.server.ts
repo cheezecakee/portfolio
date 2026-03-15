@@ -31,7 +31,7 @@ export interface ProcessedProject {
 
 // Featured projects list - edit this array to control which projects are displayed
 const FEATURED_PROJECTS = [
-	'boba'
+	'boba',
 	'mpris-daemon',
 	'hypesoft-challenge',
 	'eww-notify-go',
