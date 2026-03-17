@@ -14,10 +14,10 @@
 	<meta name="description" content="Explore my development projects and coding journey." />
 </svelte:head>
 
-<div class="mx-auto flex flex-col items-center justify-center space-y-6 px-5 md:px-30 lg:px-60">
+<div class="mx-auto flex flex-col items-center justify-center space-y-6 px-5 md:px-30 lg:px-80">
 	<div class="w-full space-y-2">
 		<span
-			class="pointer-events-none w-full bg-gradient-to-b from-gray-100 to-gray-300/80 bg-clip-text px-5 text-start text-3xl leading-none font-semibold whitespace-pre-wrap text-transparent dark:from-gray-100 dark:to-gray-300/50"
+			class="pointer-events-none w-full bg-linear-to-b from-gray-100 to-gray-300/80 bg-clip-text px-5 text-start text-3xl leading-none font-semibold whitespace-pre-wrap text-transparent dark:from-gray-100 dark:to-gray-300/50"
 		>
 			Projects
 		</span>
@@ -62,7 +62,7 @@
 		<!-- Empty state inside BentoGrid to maintain layout -->
 		<BentoGrid class="w-full gap-6">
 			<div
-				class="col-span-full flex min-h-[400px] w-full flex-col items-center justify-center space-y-4 rounded-xl border border-dashed border-neutral-200 dark:border-neutral-800"
+				class="col-span-full flex min-h-100 w-full flex-col items-center justify-center space-y-4 rounded-xl border border-dashed border-neutral-200 dark:border-neutral-800"
 			>
 				<svg
 					class="h-12 w-12 text-neutral-400"
