@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { House, User, Code, GithubLogo, LinkedinLogo, EnvelopeSimple } from 'phosphor-svelte';
+	import { Article, Code, EnvelopeSimple, GithubLogo, House, LinkedinLogo, User } from 'phosphor-svelte';
 	import * as Tooltip from '$lib/components/ui/tooltip';
 	import Separator from '$lib/components/ui/separator/separator.svelte';
 	import ContactModal from './contact/ContactModal.svelte';
@@ -23,12 +23,13 @@
 		navbar: [
 			{ label: 'Home', icon: House, href: NavURL.NAV_HOME, type: 'page' },
 			{ label: 'About', icon: User, href: NavURL.NAV_ABOUT, type: 'page' },
-			{ label: 'Projects', icon: Code, href: NavURL.NAV_PROJECTS, type: 'page' }
+			{ label: 'Projects', icon: Code, href: NavURL.NAV_PROJECTS, type: 'page' },
+			{ label: 'Blog', icon: Article, href: NavURL.NAV_BLOG, type: 'page' },
 		],
 		contact: [
 			{ label: 'Github', icon: GithubLogo, href: NavURL.GITHUB_URL, type: 'external' },
 			{ label: 'LinkedIn', icon: LinkedinLogo, href: NavURL.LINKEDIN_URL, type: 'external' },
-			{ label: 'Email', icon: EnvelopeSimple, href: NavURL.EMAIL_URL, type: 'modal' }
+			{ label: 'Email', icon: EnvelopeSimple, href: NavURL.EMAIL_URL, type: 'modal' },
 		]
 	};
 
