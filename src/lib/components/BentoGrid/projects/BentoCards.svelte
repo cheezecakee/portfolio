@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { ShineButton } from '$lib/components/ui/shine-button';
+	import { Button } from '$lib/components/ui/button';
+	import ShineBorder from '$lib/components/ui/shine-border/shine-border.svelte';
 	import { cn } from '$lib/utils';
 	import type { ProcessedProject } from '../../../../routes/projects/+page.server';
 
@@ -25,7 +26,7 @@
 
 <div
 	class={cn(
-		'group relative col-span-1 flex min-h-[280px] flex-col overflow-hidden rounded-xl border transition-colors',
+		'group relative col-span-1 flex min-h-70 flex-col overflow-hidden rounded-xl border transition-colors',
 		'border-transparent bg-white [box-shadow:0_0_0_1px_rgba(0,0,0,.03),0_2px_4px_rgba(0,0,0,.05),0_12px_24px_rgba(0,0,0,.05)]',
 		'dark:bg-black dark:[box-shadow:0_-20px_80px_-20px_#ffffff1f_inset] dark:[border:1px_solid_rgba(255,255,255,.1)]',
 		'hover:border-white dark:hover:border-white',
@@ -56,7 +57,7 @@
 
 			{#if shouldTruncateDescription}
 				<button
-					class="pointer-events-auto mt-2 text-xs text-black/70 transition-colors hover:text-black dark:text-white/70 dark:hover:text-white"
+					class="pointer-events-auto mt-2 text-xs text-black/70 transition-colors hover:text-black hover:underline hover:underline-offset-2 dark:text-white/70 dark:hover:text-white"
 					on:click={toggleDescription}
 				>
 					{isDescriptionExpanded ? 'Show less' : 'Read more'}
@@ -115,36 +116,18 @@
 
 	<!-- Action section - Always at bottom -->
 	<div class="flex w-full flex-row items-center p-4 dark:border-neutral-800">
-		<ShineButton>
-			<a
-				href={project.href}
-				target="_blank"
-				rel="noopener noreferrer"
-				class="hover: animate-shine text-md flex items-center justify-center bg-[linear-gradient(110deg,#939393,45%,#1e2631,55%,#939393)] bg-[length:200%_100%] bg-clip-text font-medium text-transparent"
-			>
-				View Project
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					width="16"
-					height="16"
-					viewBox="0 0 24 24"
-					fill="none"
-					stroke="currentColor"
-					stroke-width="2"
-					stroke-linecap="round"
-					stroke-linejoin="round"
-					class="ml-2 h-3 w-3"
-				>
-					<path d="M5 12h14" />
-					<path d="m12 5 7 7-7 7" />
-				</svg>
-			</a>
-		</ShineButton>
-		<!-- </Button> -->
+		<a href={project.href} target="_blank" rel="noopener noreferrer">
+			<Button variant="outline" class="group relative overflow-hidden">
+				<ShineBorder
+					class="opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+					shineColor="#ffffff"
+				/>
+				View Project →
+			</Button>
+		</a>
 	</div>
-
 	<!-- Hover overlay -->
 	<div
-		class="pointer-events-none absolute inset-0 z-5 transform-gpu transition-all duration-300 group-hover:bg-black/[.03] group-hover:dark:bg-neutral-800/10"
+		class="group-hover:bg-black/03 pointer-events-none absolute inset-0 z-5 transform-gpu transition-all duration-300 group-hover:dark:bg-neutral-800/10"
 	></div>
 </div>
