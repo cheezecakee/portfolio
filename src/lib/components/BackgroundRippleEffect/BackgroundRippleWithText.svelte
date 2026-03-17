@@ -10,13 +10,11 @@
 		class="pointer-events-none absolute inset-0 bottom-1 z-30 flex w-full flex-col items-center justify-center"
 	>
 		<div class="px-20 text-center md:px-0">
-			<h2
-				class="text-left text-2xl font-bold text-neutral-800 md:text-4xl lg:text-5xl dark:text-neutral-100"
-			>
-				Hi, I'm Anabel
-			</h2>
+			<h2 class="text-left text-2xl font-bold text-neutral-800 md:text-4xl lg:text-5xl dark:text-neutral-100">
+	            Building web apps, tools,<br />
+            </h2>
 			<p class="mt-4 text-left text-neutral-800 dark:text-neutral-500">
-				Full-stack developer creating responsive experiences.
+                and the occasional experiments.
 			</p>
 		</div>
 	</div>
