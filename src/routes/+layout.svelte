@@ -1,7 +1,7 @@
 <script lang="ts">
 	import '../app.css';
 	import favicon from '$lib/assets/favicon.svg';
-	import ShimmerButton from '$lib/components/ui/shimmer-button/ShimmerButton.svelte';
+	import ShimmerButton from '$lib/components/ui/shimmer-button/shimmer-button.svelte';
 	import Menu from '$lib/components/DockMenu/Menu.svelte';
 	import { Toaster } from '$lib/components/ui/sonner';
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';

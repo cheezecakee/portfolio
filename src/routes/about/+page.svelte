@@ -4,7 +4,6 @@
 	import BentoTechStack from '$lib/components/BentoGrid/about/BentoTechStack.svelte';
 	import { techCategories } from '$lib/components/BentoGrid/about/techStackData';
 	import BentoOrbital from '$lib/components/BentoGrid/about/BentoOrbital.svelte';
-	import { ShineButton } from '$lib/components/ui/shine-button';
 
 	// Sample description for the about section
 	const aboutDescription =
@@ -20,7 +19,7 @@
 	<!-- Gradient Title outside the grid -->
 
 	<span
-		class="pointer-events-none w-full bg-gradient-to-b from-gray-100 to-gray-300/80 bg-clip-text px-5 text-start text-3xl leading-none font-semibold whitespace-pre-wrap text-transparent dark:from-gray-100 dark:to-gray-300/50"
+		class="pointer-events-none w-full bg-linear-to-b from-gray-100 to-gray-300/80 bg-clip-text px-5 text-start text-3xl leading-none font-semibold whitespace-pre-wrap text-transparent dark:from-gray-100 dark:to-gray-300/50"
 	>
 		About Me
 	</span>
