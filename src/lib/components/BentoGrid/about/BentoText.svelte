@@ -3,7 +3,7 @@
 
 	let { title = '', description = '', showTitle = true, className = '' } = $props();
 
-	const paragraphs = description.split('\n\n').filter((p) => p.trim());
+	let paragraphs = $derived(description.split('\n\n').filter((p) => p.trim()));
 </script>
 
 <div
@@ -18,7 +18,7 @@
 		{#if showTitle && title}
 			<div class="mb-4">
 				<h3 class="mb-1 text-xl font-semibold text-foreground">{title}</h3>
-				<div class="h-0.5 w-12 rounded-full bg-gradient-to-r from-primary to-primary/50"></div>
+				<div class="h-0.5 w-12 rounded-full bg-linear-to-r from-primary to-primary/50"></div>
 			</div>
 		{/if}
 
@@ -29,10 +29,6 @@
 				{/each}
 			</div>
 		{/if}
-		<!-- Hover Overlay -->
-		<!-- <div -->
-		<!-- 	class="pointer-events-none absolute inset-0 transform-gpu transition-all duration-300 group-hover:bg-black/[.03] group-hover:dark:bg-neutral-800/10" -->
-		<!-- ></div> -->
 	</div>
 </div>
 

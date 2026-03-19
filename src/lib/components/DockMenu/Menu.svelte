@@ -1,5 +1,13 @@
 <script lang="ts">
-	import { Article, Code, EnvelopeSimple, GithubLogo, House, LinkedinLogo, User } from 'phosphor-svelte';
+	import {
+		ArticleIcon,
+		CodeIcon,
+		EnvelopeSimpleIcon,
+		GithubLogoIcon,
+		HouseIcon,
+		LinkedinLogoIcon,
+		UserIcon
+	} from 'phosphor-svelte';
 	import * as Tooltip from '$lib/components/ui/tooltip';
 	import Separator from '$lib/components/ui/separator/separator.svelte';
 	import ContactModal from './contact/ContactModal.svelte';
@@ -21,15 +29,15 @@
 
 	const navigationConfig: Navs = {
 		navbar: [
-			{ label: 'Home', icon: House, href: NavURL.NAV_HOME, type: 'page' },
-			{ label: 'About', icon: User, href: NavURL.NAV_ABOUT, type: 'page' },
-			{ label: 'Projects', icon: Code, href: NavURL.NAV_PROJECTS, type: 'page' },
-			{ label: 'Blog', icon: Article, href: NavURL.NAV_BLOG, type: 'page' },
+			{ label: 'Home', icon: HouseIcon, href: NavURL.NAV_HOME, type: 'page' },
+			{ label: 'About', icon: UserIcon, href: NavURL.NAV_ABOUT, type: 'page' },
+			{ label: 'Projects', icon: CodeIcon, href: NavURL.NAV_PROJECTS, type: 'page' },
+			{ label: 'Blog', icon: ArticleIcon, href: NavURL.NAV_BLOG, type: 'page' }
 		],
 		contact: [
-			{ label: 'Github', icon: GithubLogo, href: NavURL.GITHUB_URL, type: 'external' },
-			{ label: 'LinkedIn', icon: LinkedinLogo, href: NavURL.LINKEDIN_URL, type: 'external' },
-			{ label: 'Email', icon: EnvelopeSimple, href: NavURL.EMAIL_URL, type: 'modal' },
+			{ label: 'Github', icon: GithubLogoIcon, href: NavURL.GITHUB_URL, type: 'external' },
+			{ label: 'LinkedIn', icon: LinkedinLogoIcon, href: NavURL.LINKEDIN_URL, type: 'external' },
+			{ label: 'Email', icon: EnvelopeSimpleIcon, href: NavURL.EMAIL_URL, type: 'modal' }
 		]
 	};
 
@@ -55,7 +63,7 @@
 <Tooltip.Provider>
 	<div
 		class="relative flex w-full flex-col items-center justify-center overflow-hidden rounded-lg
-		bg-gradient-to-t from-black/50 via-transparent to-transparent pb-5"
+		bg-linear-to-t from-black/50 via-transparent to-transparent pb-5"
 	>
 		<Dock direction="middle" className="relative">
 			{#snippet children({

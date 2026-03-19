@@ -45,7 +45,8 @@
 	const routeLabelsMap: Record<string, string> = {
 		'/': 'Home',
 		'/about': 'About',
-		'/projects': 'Projects'
+		'/projects': 'Projects',
+		'/blog': 'Blog'
 	};
 
 	let dockClass = $derived(
