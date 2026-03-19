@@ -1,0 +1,9 @@
+---
+layout: blog
+title: "Understanding Rust Lifetimes"
+description: "Deep dive into lifetimes and ownership in Rust"
+tags: ["rust", "programming", "systems"]
+date: 2024-07-19
+---
+
+I’ve been learning Rust and wanted to understand lifetimes better. Here’s how I visualize ownership and borrowing in real scenarios...

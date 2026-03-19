@@ -1,0 +1,9 @@
+---
+layout: blog
+title: "Exploring SvelteKit Animations"
+description: "How to make smooth motion effects with SvelteKit"
+tags: ["sveltekit", "animations", "frontend"]
+date: 2023-01-08
+---
+
+I experimented with motion values and transitions in SvelteKit to make interactive UI elements feel more alive...

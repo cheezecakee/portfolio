@@ -1,0 +1,9 @@
+---
+layout: blog
+title: "Building a Mini Node.js API"
+description: "Creating a simple REST API using Node.js and Express"
+tags: ["nodejs", "api", "backend"]
+date: 2026-03-14
+---
+
+Today I built a small REST API to manage a todo list. I explored routing, middleware, and JSON handling in Express...

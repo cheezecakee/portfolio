@@ -1,0 +1,10 @@
+---
+    layout: blog
+    title: "Building My Go TUI Framework"
+    description: "Designing components on top of Bubble Tea"
+    tags: ["go", "tui"]
+    date: 2025-11-02
+---
+
+
+Today I started designing the layout system...
