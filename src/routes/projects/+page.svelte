@@ -1,7 +1,7 @@
 <script lang="ts">
 	import BentoGrid from '$lib/components/BentoGrid/BentoGrid.svelte';
 	import BentoCards from '$lib/components/BentoGrid/projects/BentoCards.svelte';
-	import MagicCard from '$lib/components/ui/magic-card/MagicCard.svelte';
+	import MagicCard from '$lib/components/ui/magic-card/magic-card.svelte';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
@@ -34,10 +34,12 @@
 	</div>
 
 	{#if projects.length > 0}
-		<BentoGrid class="w-full gap-6">
-			{#each projects as project (project.id)}
-				<BentoCards {project} background={MagicCard} />
-			{/each}
+		<BentoGrid class="w-full gap-6 px-5">
+			{#snippet children()}
+				{#each projects as project (project.id)}
+					<BentoCards {project} background={MagicCard} />
+				{/each}
+			{/snippet}
 		</BentoGrid>
 
 		<!-- Link to full GitHub profile -->
@@ -60,7 +62,7 @@
 		</div>
 	{:else}
 		<!-- Empty state inside BentoGrid to maintain layout -->
-		<BentoGrid class="w-full gap-6">
+		<BentoGrid class="w-full gap-6 px-5">
 			<div
 				class="col-span-full flex min-h-100 w-full flex-col items-center justify-center space-y-4 rounded-xl border border-dashed border-neutral-200 dark:border-neutral-800"
 			>

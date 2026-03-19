@@ -25,7 +25,7 @@
 <div class="dark flex min-h-screen flex-col bg-black text-white">
 	<!-- Header -->
 	<header
-		class="fixed z-50 flex w-full items-center justify-between bg-linear-to-b from-black to-transparent px-5 py-5 md:px-30 lg:px-60"
+		class="fixed z-50 flex w-full items-center justify-between bg-linear-to-b from-black to-transparent px-5 py-5 md:px-30 lg:px-85"
 	>
 		<!-- Left side (button) -->
 		<div></div>
@@ -33,31 +33,33 @@
 		<!-- Right side -->
 		<DropdownMenu.Root>
 			<DropdownMenu.Trigger>
-				<ShimmerButton class="shadow-2xl" on:click={toggle}>
-					<span
-						class="text-center text-sm leading-none font-medium tracking-tight whitespace-pre-wrap text-white lg:text-lg dark:from-white dark:to-slate-900/10"
-					>
-						Resume
-					</span>
-				</ShimmerButton>
+				{#snippet child({ props })}
+					<ShimmerButton {...props} class="shadow-2xl" on:click={toggle}>
+						<span
+							class="text-center text-sm leading-none font-medium tracking-tight whitespace-pre-wrap text-white lg:text-lg dark:from-white dark:to-slate-900/10"
+						>
+							Resume
+						</span>
+					</ShimmerButton>
+				{/snippet}
 			</DropdownMenu.Trigger>
 			<DropdownMenu.Content
 				class=" border-none border-black bg-slate-900/10 text-center text-sm leading-none font-medium tracking-tight text-white lg:text-lg "
 			>
 				<DropdownMenu.Group>
-					<DropdownMenu.Item>
-						<a href={resumeEn} target="_blank" rel="noopener noreferrer">Resume - English</a>
-					</DropdownMenu.Item>
-					<DropdownMenu.Item>
-						<a href={resumePt} target="_blank" rel="noopener noreferrer">Resume - Portuguese</a>
-					</DropdownMenu.Item>
+					<a href={resumeEn} target="_blank" rel="noopener noreferrer">
+						<DropdownMenu.Item>English</DropdownMenu.Item>
+					</a>
+					<a href={resumePt} target="_blank" rel="noopener noreferrer">
+						<DropdownMenu.Item>Portuguese</DropdownMenu.Item>
+					</a>
 				</DropdownMenu.Group>
 			</DropdownMenu.Content>
 		</DropdownMenu.Root>
 	</header>
 
 	<!-- Main content -->
-	<main class="flex-1 overflow-y-auto pt-20 pb-40">
+	<main class="flex-1 overflow-y-auto pt-35 pb-40">
 		{@render children?.()}
 	</main>
 
