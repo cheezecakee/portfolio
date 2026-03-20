@@ -3,11 +3,10 @@
 	import BentoText from '$lib/components/BentoGrid/about/BentoText.svelte';
 	import BentoTechStack from '$lib/components/BentoGrid/about/BentoTechStack.svelte';
 	import { techCategories } from '$lib/components/BentoGrid/about/techStackData';
-	import BentoOrbital from '$lib/components/BentoGrid/about/BentoOrbital.svelte';
+	// import BentoOrbital from '$lib/components/BentoGrid/about/BentoOrbital.svelte';
 
-	// Sample description for the about section
 	const aboutDescription =
-		"I'm a passionate junior developer with a love for creating innovative solutions and learning new technologies. My journey in software development has been driven by curiosity and a desire to build meaningful applications that make a difference.\n\nI enjoy working with modern web technologies and am always eager to tackle new challenges that help me grow as a developer.";
+		"Hi there, welcome to my portfolio.\n\nFor as long as I can remember, I’ve always loved computers, and understanding how machines work has always interested me. This led me to pursue a degree in computer science, though I wasn’t sure what I wanted to do.\n\nWhile trying to figure that out, I was competing on a professional esports team and doing freelance work as an illustrator.\n\nThat changed during the pandemic when I got into coding. I’ve been building web apps and tools ever since. Coding is an endless learning experience, and every day I pick up something new.\n\nMy main focus is backend and software development, but I’ve also worked on production-level frontend projects. I've included a list of tools, languages, and frameworks I've worked with before. If you’d like to get in touch, feel free to send a message through the contact form.";
 </script>
 
 <svelte:head>
@@ -28,17 +27,12 @@
 		<!-- Left column: Text + TechStack -->
 		<div class="col-span-1 flex flex-col">
 			<BentoText description={aboutDescription} showTitle={false} />
-			<BentoTechStack
-				title="Tech Stack"
-				categories={techCategories}
-				showTitle={true}
-				className="mt-6"
-			/>
 		</div>
 
 		<!-- Right column: Orbital only -->
-		<div class="col-span-1 flex items-start justify-center">
-			<BentoOrbital />
+		<div class="col-span-1 flex flex-col items-start justify-start">
+			<BentoTechStack title="Tech Stack" categories={techCategories} showTitle={true} />
+			<!-- <BentoOrbital /> -->
 		</div>
 	</BentoGrid>
 </div>

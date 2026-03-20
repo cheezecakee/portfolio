@@ -14,7 +14,6 @@
 	function toggle() {
 		open = !open;
 	}
-
 	let { children, data } = $props();
 </script>
 

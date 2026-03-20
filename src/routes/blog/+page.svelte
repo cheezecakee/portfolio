@@ -78,11 +78,15 @@
 		<!-- Left column: Latest posts -->
 		<div class="col-span-1 flex flex-col">
 			<div class="flex flex-col space-y-4">
-				<span
-					class="pointer-events-none w-full bg-linear-to-b from-gray-100 to-gray-300/80 bg-clip-text text-start text-2xl leading-none font-semibold whitespace-pre-wrap text-transparent dark:from-gray-100 dark:to-gray-300/50"
-				>
-					Latest
-				</span>
+				<!-- <span -->
+				<!-- 	class="pointer-events-none w-full bg-linear-to-b from-gray-100 to-gray-300/80 bg-clip-text text-start text-2xl leading-none font-semibold whitespace-pre-wrap text-transparent dark:from-gray-100 dark:to-gray-300/50" -->
+				<!-- > -->
+				<!-- 	Latest -->
+				<!-- </span> -->
+				<div class="mb-4">
+					<h3 class="mb-1 text-xl font-semibold text-foreground">Latest</h3>
+					<div class="h-0.5 w-12 rounded-full bg-linear-to-r from-primary to-primary/50"></div>
+				</div>
 				{#if mobile.current}
 					{#each posts.slice(0, 1) as post}
 						<LatestCard {post} />
