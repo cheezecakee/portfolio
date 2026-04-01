@@ -6,16 +6,15 @@
 	<BackgroundRippleEffect />
 
 	<!-- Center text within the BackgroundRippleEffect area -->
-	<div
-		class="pointer-events-none absolute inset-0 bottom-1 z-30 flex w-full flex-col items-center justify-center"
-	>
-		<div class="px-20 text-center md:px-0">
-			<h2 class="text-left text-2xl font-bold text-neutral-800 md:text-4xl lg:text-5xl dark:text-neutral-100">
-	            Building web apps, tools,<br />
-            </h2>
-			<p class="mt-4 text-left text-neutral-800 dark:text-neutral-500">
-                and the occasional experiments.
-			</p>
-		</div>
-	</div>
+    <div class="space-y-3 px-20 text-center md:px-0">
+        <h2 class="text-3xl font-bold text-neutral-800 md:text-5xl lg:text-6xl dark:text-neutral-100">
+            Backend developer.<br />
+            <span class="bg-linear-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+                Systems explorer.
+            </span>
+        </h2>
+        <p class="mx-auto mt-4 max-w-xl text-neutral-600 dark:text-neutral-400">
+            I build infrastructure and tools. Currently crafting a TUI framework in Go.
+        </p>
+    </div>
 </div>

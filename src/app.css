@@ -110,6 +110,16 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+  --animate-meteor: meteor 5s linear infinite;
+	@keyframes meteor {
+		0% {
+			transform: rotate(var(--angle)) translateX(0);
+			opacity: 1;}
+		70% {
+			opacity: 1;}
+		100% {
+			transform: rotate(var(--angle)) translateX(-1000px);
+			opacity: 0;}}
 }
 
 @layer base {
@@ -169,3 +179,45 @@
 .animate-magicslide {
   animation: magicslide var(--speed, 3s) ease-in-out infinite alternate;
 }
+
+@custom-variant data-open {
+	&:where([data-state="open"]), &:where([data-open]:not([data-open="false"])) {
+		@slot;}}
+
+@custom-variant data-closed {
+	&:where([data-state="closed"]), &:where([data-closed]:not([data-closed="false"])) {
+		@slot;}}
+
+@custom-variant data-checked {
+	&:where([data-state="checked"]), &:where([data-checked]:not([data-checked="false"])) {
+		@slot;}}
+
+@custom-variant data-unchecked {
+	&:where([data-state="unchecked"]), &:where([data-unchecked]:not([data-unchecked="false"])) {
+		@slot;}}
+
+@custom-variant data-selected {
+	&:where([data-selected]) {
+		@slot;}}
+
+@custom-variant data-disabled {
+	&:where([data-disabled="true"]), &:where([data-disabled]:not([data-disabled="false"])) {
+		@slot;}}
+
+@custom-variant data-active {
+	&:where([data-state="active"]), &:where([data-active]:not([data-active="false"])) {
+		@slot;}}
+
+@custom-variant data-horizontal {
+	&:where([data-orientation="horizontal"]) {
+		@slot;}}
+
+@custom-variant data-vertical {
+	&:where([data-orientation="vertical"]) {
+		@slot;}}
+
+@utility no-scrollbar {
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+	&::-webkit-scrollbar {
+		display: none;}}

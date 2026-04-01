@@ -15,8 +15,6 @@
 </svelte:head>
 
 <div class="mx-auto flex flex-col items-center justify-center space-y-6 px-5 md:px-30 lg:px-80">
-	<!-- Gradient Title outside the grid -->
-
 	<span
 		class="pointer-events-none w-full bg-linear-to-b from-gray-100 to-gray-300/80 bg-clip-text px-5 text-start text-3xl leading-none font-semibold whitespace-pre-wrap text-transparent dark:from-gray-100 dark:to-gray-300/50"
 	>
@@ -32,7 +30,6 @@
 		<!-- Right column: Orbital only -->
 		<div class="col-span-1 flex flex-col items-start justify-start">
 			<BentoTechStack title="Tech Stack" categories={techCategories} showTitle={true} />
-			<!-- <BentoOrbital /> -->
 		</div>
 	</BentoGrid>
 </div>
