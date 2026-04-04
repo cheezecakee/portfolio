@@ -1,32 +1,35 @@
 <script lang="ts">
-	import { SpeedDial, SpeedDialTrigger, Listgroup, ListgroupItem } from 'flowbite-svelte';
-	import CVIcon from '$lib/components/icons/CVIcon.svelte';
+	import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
 	import resumeEn from '$lib/assets/resume/resume.pdf';
 	import resumePt from '$lib/assets/resume/resume-portuguese.pdf';
+	import Button from '../ui/button/button.svelte';
 </script>
 
-<SpeedDialTrigger class="group relative !m-0 flex items-center justify-center !p-0">
-	{#snippet icon()}
-		<div
-			class="flex size-10 items-center justify-center rounded-full bg-primary/10 transition-all hover:bg-primary/20 md:size-12"
-			style="animation: pulse-ring 2.5s ease-out infinite; --pulse-color: #3b82f6;"
-		>
-			<CVIcon class="size-5 md:size-6" />
-		</div>
-	{/snippet}
-</SpeedDialTrigger>
-
-<SpeedDial tooltip="none" placement="right-start" class="!mt-0 !p-0">
-	<Listgroup class="divide-none rounded-lg bg-primary/10 backdrop-blur-sm">
-		<a href={resumeEn} target="_blank" rel="noopener noreferrer">
-			<ListgroupItem class="flex gap-2 px-4 py-2 text-sm text-foreground hover:bg-primary/20">
-				English CV
-			</ListgroupItem>
-		</a>
-		<a href={resumePt} target="_blank" rel="noopener noreferrer">
-			<ListgroupItem class="flex gap-2 px-4 py-2 text-sm text-foreground hover:bg-primary/20">
-				Portuguese CV
-			</ListgroupItem>
-		</a>
-	</Listgroup>
-</SpeedDial>
+<DropdownMenu.Root>
+	<DropdownMenu.Trigger>
+		{#snippet child({ props })}
+			<Button
+				{...props}
+				variant="outline"
+				size="lg"
+				class="leading-none text-foreground"
+				aria-label="Resume"
+				style="animation: pulse-ring 2.5s ease-out infinite; --pulse-color: #ffffff;"
+			>
+				Resume
+			</Button>
+		{/snippet}
+	</DropdownMenu.Trigger>
+	<DropdownMenu.Content
+		class="border-none bg-background text-center text-sm leading-none font-medium tracking-tight text-foreground lg:text-lg"
+	>
+		<DropdownMenu.Group>
+			<a href={resumeEn} target="_blank" rel="noopener noreferrer">
+				<DropdownMenu.Item>English</DropdownMenu.Item>
+			</a>
+			<a href={resumePt} target="_blank" rel="noopener noreferrer">
+				<DropdownMenu.Item>Portuguese</DropdownMenu.Item>
+			</a>
+		</DropdownMenu.Group>
+	</DropdownMenu.Content>
+</DropdownMenu.Root>

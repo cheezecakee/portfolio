@@ -68,10 +68,23 @@
 }
 
 @theme inline {
+  --header-height: 9.25rem;
+
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+
+  --header-height-sm: calc(var(--header-height) - 0.75rem);
+  --header-height-md: calc(var(--header-height) -  0.35rem);
+  --header-height-lg: var(--header-height);
+
+  --spacing-section-height-lg: calc(100vh-var(--header-height-lg));
+  --spacing-section-height-sm: calc(100vh-var(--header-height-sm));
+
+  --spacing-header-height-sm: var(--header-height-sm);
+  --spacing-header-height: var(--header-height);
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);

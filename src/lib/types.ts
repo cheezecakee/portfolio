@@ -1,7 +1,6 @@
 export type PageNav = {
 	label: string;
 	icon: typeof import('phosphor-svelte').House;
-	href: `/${string}`;
 	type: 'page';
 };
 

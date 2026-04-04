@@ -90,7 +90,7 @@
 <div
 	bind:this={containerRef}
 	class={cn(
-		'relative inline-block text-left font-sans text-[30pt] leading-none font-bold [filter:url(#threshold)_blur(0.6px)] lg:text-[3rem]',
+		'filter:[url(#threshold)_blur(0.6px)] relative inline-block text-left font-sans text-[1.875rem] leading-none font-bold',
 		className
 	)}
 	style="white-space: nowrap;"
