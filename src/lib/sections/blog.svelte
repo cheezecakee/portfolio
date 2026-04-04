@@ -34,7 +34,7 @@
 			for (const post of filteredPosts) {
 				const date = new Date(post.meta.date);
 				const year = String(date.getFullYear());
-				const month = date.toLocaleString('default', { month: 'long' });
+				const month = date.toLocaleString('en-US', { month: 'long' });
 
 				if (!archiveMap.has(year)) archiveMap.set(year, new Map());
 				const yearMap = archiveMap.get(year)!;

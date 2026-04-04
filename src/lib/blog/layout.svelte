@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { LinkIcon, CheckIcon } from 'phosphor-svelte';
+	import { onMount } from 'svelte';
 
 	let {
 		title,
@@ -23,6 +24,20 @@
 		copied = true;
 		setTimeout(() => (copied = false), 2000);
 	}
+
+	function addLanguageLabels() {
+		document.querySelectorAll('pre code[class*="language-"]').forEach((code) => {
+			const pre = code.parentElement;
+			const lang = code.className.match(/language-(\w+)/)?.[1];
+			if (lang && pre && !pre.hasAttribute('data-language')) {
+				pre.setAttribute('data-language', lang);
+			}
+		});
+	}
+
+	onMount(() => {
+		addLanguageLabels();
+	});
 </script>
 
 <svelte:head>
@@ -30,7 +45,9 @@
 	<meta property="og:title" content={title} />
 </svelte:head>
 
-<article class="mx-auto flex min-h-[calc(100dvh-18rem)] flex-col space-y-6 px-5">
+<article
+	class="mx-auto flex min-h-[calc(100dvh-var(--header-height))] flex-col space-y-6 px-5 md:min-h-[calc(100dvh-var(--header-height-md))] md:px-30 lg:px-80"
+>
 	<!-- Title  -->
 	<div class="flex flex-col text-left">
 		<h1 class="w-full text-4xl font-bold">{title}</h1>
@@ -56,7 +73,7 @@
 
 	<!-- Footer -->
 	<div class="flex justify-between">
-		<a href="/blog" class="text-sm text-foreground/40 hover:text-foreground/80">← Back to blog</a>
+		<a href="/#blog" class="text-sm text-foreground/40 hover:text-foreground/80">← Back to blog</a>
 		<button
 			onclick={copyLink}
 			class="text-foreground/40 transition hover:text-foreground/80"

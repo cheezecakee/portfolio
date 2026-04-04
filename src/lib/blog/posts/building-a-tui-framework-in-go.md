@@ -6,24 +6,25 @@ tags: ["go", "tui"]
 date: 2026-03-20
 ---
 
-This project was actually an accident, it was never meant to be a mini framework but as I added more features it became it's own standalone project. I was building a cli quiz game, everything was going well. I had a working game engine, scoring system and everything setup, but when it came time build the UI I was completely demotivated. Like every frontend design you have to read hundreds of styling options and themes to know how to align a single box on the screen, and to make matters worst endless boilerplate.
+This project was actually an accident, it was never meant to be a mini framework but as I added more features it became it's own standalone project. I was building a cli quiz game, everything was going well. I had a working game engine, scoring system and everything setup, but when it came time build the UI I was completely demotivated. Like every frontend design you have to read hundreds of styling options and themes to know how to align a single box on the screen, and to make matters worse endless boilerplate.
 
-If you're anything like me and love automation games, the first think that comes to mind when looking at all the boilerplate you have to "produce" is, how can I automate this? 
+If you're anything like me and love automation games, the first thing that comes to mind when looking at all the boilerplate you have to "produce" is, how can I automate this? 
 Just like any automation game, one simple output isn't enough, must increase production as efficiently as possible. 
 
-Anyway enough about factory games, back to my crisis, I was using [Bubble Tea](https://github.com/charmbracelet/bubbletea) a Go framework based on The Elm Architecture. If you don't know about the Elm architecture a brief description would be that it's a *pattern for architecting interactive programs, like webapps and games*. It's broken down into three parts:
+Anyway, enough about factory games, back to my crisis, I was using [Bubble Tea](https://github.com/charmbracelet/bubbletea) a Go framework based on The Elm Architecture. If you don't know about the Elm architecture a brief description would be that it's a *pattern for architecting interactive programs, like webapps and games*. It's broken down into three parts:
 - Model — the state of your application
 - View — a way to turn your state into HTML
 - Update — a way to update your state based on messages
 
 
-Bubble tea works the exact same way, along with Bubble tea there are a few more libraries that we need to use to make our TUIs look pretty and functional:
+Bubble Tea works the exact same way, along with Bubble Tea there are a few more libraries that we need to use to make our TUIs look pretty and functional:
 - Bubbles — which are common bubble tea components, 
 - Lipgloss — Style, format and layout tools for terminal applications
 
-While there are more libraries these are the other two main libraries that work along Bubble tea to create most TUIs. 
+While there are more libraries these are the other two main libraries that work along Bubble Tea to create most TUIs. 
 
-Now that we have a general idea of Bubble tea works, let's get to the framework. Eveything in Bubble tea works through the Update() with something called Msg, Msg can be of anytype and inside Update you decide what each type does. An example that Bubble tea shows is this:
+Now that we have a general idea of how Bubble Tea works, let's get to the framework. Eveything in Bubble Tea works through the Update() with something called Msg, Msg can be of anytype and inside Update you decide what each type does. An example that Bubble Tea shows is this:
+
 ```go
 func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
     switch msg := msg.(type) {
@@ -67,6 +68,7 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
     return m, nil
 }
 ```
+
 It's simple, but imagine having to write that for every new screen you build. With the way Bubble Tea works through Msgs, I had to find a way to first create a base layout that could hold everything each page shares, including commands.
 
 Bubble Tea doesn't really provide a good routing system out of the box (even though they do show an example of how it could be implemented), so I started there. I created an interface and a root "App" that every screen could use to receive the Msgs.
@@ -105,7 +107,7 @@ func (a *App) View() tea.View {
 	return a.current.View()
 }
 ```
-I even added some history so that you could navigate back, and fort and all you really need was to create the normal Bubble Tea model like this:
+I even added some history so that you could navigate back, and forth and all you really need was to create the normal Bubble Tea model like this:
 ```go 
 type Home struct {}
 
@@ -123,4 +125,4 @@ func (s *Home) Update(msg tea.Msg) (Screen, tea.Cmd) {
 
 func (s *Home) View() tea.View {}
 ```
-And it worked! Well, the routing worked at least. I still needed some form of navigation and rendering. Little did I know this was going to blow up into something much bigger.
+And it worked! Well, the routing worked at least. I still needed some form of navigation and rendering. Little did I know this was going to blow up into something much bigger. In Part 2, I'll cover how I solved the rendering system and built the component library.

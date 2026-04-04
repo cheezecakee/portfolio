@@ -1,6 +1,6 @@
 import type { BlogPost } from './types';
 
-const modules = import.meta.glob('./posts/*.svx', { eager: true });
+const modules = import.meta.glob('./posts/*.{svx,md}', { eager: true });
 
 export function getPosts(): BlogPost[] {
 	const posts: BlogPost[] = [];
@@ -8,7 +8,8 @@ export function getPosts(): BlogPost[] {
 	for (const path in modules) {
 		const mod = modules[path] as any;
 
-		const slug = path.split('/').pop()?.replace('.svx', '') ?? '';
+		const filename = path.split('/').pop() ?? '';
+		const slug = filename.replace(/\.(svx|md)$/, '');
 
 		posts.push({
 			slug,

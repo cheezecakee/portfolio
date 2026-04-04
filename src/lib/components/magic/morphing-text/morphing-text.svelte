@@ -9,31 +9,16 @@
 
 	let { texts, class: className }: MorphingTextProps = $props();
 
-	const morphTime = 1.5;
+	const morphTime = 0.3;
 	let morph = $state(0);
 	let isMorphing = $state(false);
 	let currentText = $state('');
 	let nextText = $state('');
+	let pendingText: string | null = $state(null);
 	let text1Ref: HTMLSpanElement | null = $state(null);
 	let text2Ref: HTMLSpanElement | null = $state(null);
-	let containerRef: HTMLDivElement | null = $state(null);
 	let animationFrameId: number | null = null;
 	let lastTimestamp = 0;
-
-	$effect(() => {
-		if (!texts.length) return;
-		const newText = texts[0];
-		if (!currentText) {
-			currentText = newText;
-			nextText = newText;
-			if (text1Ref) text1Ref.textContent = currentText;
-			if (text2Ref) text2Ref.textContent = nextText;
-		} else if (newText !== currentText && newText !== nextText) {
-			nextText = newText;
-			isMorphing = true;
-			morph = 0;
-		}
-	});
 
 	function setStyles(fraction: number) {
 		if (!text1Ref || !text2Ref) return;
@@ -46,6 +31,32 @@
 		text1Ref.textContent = currentText;
 		text2Ref.textContent = nextText;
 	}
+
+	function startMorph(newText: string) {
+		nextText = newText;
+		isMorphing = true;
+		morph = 0;
+		pendingText = null;
+	}
+
+	$effect(() => {
+		if (!texts.length) return;
+		const newText = texts[0];
+		if (!currentText) {
+			// first run
+			currentText = newText;
+			nextText = newText;
+			if (text1Ref) text1Ref.textContent = currentText;
+			if (text2Ref) text2Ref.textContent = nextText;
+		} else if (newText !== currentText && newText !== nextText) {
+			if (isMorphing) {
+				// already morphing – store the new target for later
+				pendingText = newText;
+			} else {
+				startMorph(newText);
+			}
+		}
+	});
 
 	function animate(timestamp: number) {
 		if (!animationFrameId) return;
@@ -60,6 +71,7 @@
 				currentText = nextText;
 				isMorphing = false;
 				morph = 0;
+				// reset styles
 				if (text1Ref) {
 					text1Ref.style.filter = '';
 					text1Ref.style.opacity = '100%';
@@ -70,6 +82,11 @@
 				}
 				text1Ref!.textContent = currentText;
 				text2Ref!.textContent = currentText;
+
+				// if another text was requested while morphing, start a new morph
+				if (pendingText && pendingText !== currentText) {
+					startMorph(pendingText);
+				}
 			} else {
 				setStyles(morph);
 			}
@@ -88,7 +105,6 @@
 </script>
 
 <div
-	bind:this={containerRef}
 	class={cn(
 		'filter:[url(#threshold)_blur(0.6px)] relative inline-block text-left font-sans text-[1.875rem] leading-none font-bold',
 		className

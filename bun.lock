@@ -1,5 +1,6 @@
 {
   "lockfileVersion": 1,
+  "configVersion": 0,
   "workspaces": {
     "": {
       "name": "portfolio",
@@ -9,6 +10,7 @@
         "gsap": "^3.14.2",
         "motion-sv": "^0.1.10",
         "phosphor-svelte": "^3.1.0",
+        "prismjs": "^1.30.0",
         "resend": "^6.9.3",
         "svelte-inview": "^4.0.4",
         "svelte-motion": "^0.12.2",

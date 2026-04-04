@@ -5,11 +5,12 @@
 	import { Toaster } from '$lib/components/ui/sonner';
 	import Header from '$lib/components/header/header.svelte';
 	import { onMount } from 'svelte';
-	import Meteors from '$lib/components/magic/meteors/meteors.svelte';
 	import { ResumeButton } from '$lib/components/resume-button';
+	import { page } from '$app/state';
 
 	let { children, data } = $props();
 
+	let isBlogPost = $derived(page.url.pathname.startsWith('/blog/'));
 	let activeSection = $state('About');
 
 	onMount(() => {
@@ -74,14 +75,19 @@
 
 <div class="flex min-h-screen flex-col bg-background text-foreground">
 	<!-- Header -->
-	<div
-		class="md:min-h-header-height-md fixed top-0 z-50 mx-auto flex min-h-header-height-sm w-full items-center justify-between bg-linear-to-t from-transparent via-background to-background px-10 py-5 md:px-35 lg:min-h-header-height lg:px-85"
-	>
-		<Header currentTitle={activeSection} />
-		<ResumeButton />
-	</div>
+	{#if !isBlogPost}
+		<div
+			class="md:min-h-header-height-md fixed top-0 z-50 mx-auto flex min-h-header-height-sm w-full items-center justify-between bg-linear-to-t from-transparent via-background to-background px-10 py-5 md:px-35 lg:min-h-header-height lg:px-85"
+		>
+			<Header currentTitle={activeSection} />
+			<ResumeButton />
+		</div>
+	{:else}
+		<div
+			class="md:min-h-header-height-md fixed top-0 z-50 mx-auto flex min-h-header-height-sm w-full items-center justify-between bg-linear-to-t from-transparent via-background to-background px-10 py-5 md:px-35 lg:min-h-header-height lg:px-85"
+		></div>
+	{/if}
 
-	<!-- <Meteors number={30} class="fixed" /> -->
 	<!-- Main -->
 	<main
 		class="sm-pt-header-height-sm flex-1 overflow-x-hidden overflow-y-auto pt-header-height pb-40"

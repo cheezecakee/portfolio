@@ -22,7 +22,7 @@
 			{#if post}
 				<Card.Title class="text-lg">{post.meta.title}</Card.Title>
 				<Card.Description>
-					{new Date(post.meta.date).toLocaleDateString(undefined, {
+					{new Date(post.meta.date).toLocaleDateString('en-US', {
 						year: 'numeric',
 						month: 'short',
 						day: 'numeric'
