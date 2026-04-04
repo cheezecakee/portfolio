@@ -1,7 +1,6 @@
 <script lang="ts">
-	import { Command as CommandPrimitive } from "bits-ui";
-	import { cn } from "$lib/utils.js";
-
+	import { Command as CommandPrimitive } from 'bits-ui';
+	import { cn } from '$lib/utils.js';
 	let {
 		ref = $bindable(null),
 		class: className,
@@ -12,6 +11,9 @@
 <CommandPrimitive.List
 	bind:ref
 	data-slot="command-list"
-	class={cn("max-h-[300px] scroll-py-1 overflow-x-hidden overflow-y-auto", className)}
+	class={cn(
+		'no-scrollbar max-h-72 scroll-py-1 overflow-x-hidden overflow-y-auto outline-none',
+		className
+	)}
 	{...restProps}
 />

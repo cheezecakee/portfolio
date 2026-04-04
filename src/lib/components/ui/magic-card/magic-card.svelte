@@ -83,6 +83,7 @@
 </script>
 
 <div
+	id="magic-card"
 	class={cn('group relative rounded-[inherit]', className)}
 	onpointermove={handlePointerMove}
 	onpointerleave={reset}
@@ -98,7 +99,7 @@
 		class="pointer-events-none absolute inset-px rounded-[inherit] opacity-0 transition-opacity duration-300 group-hover:opacity-100"
 		style={{ background: overlayGradient, opacity: gradientOpacity }}
 	/>
-	<div class="relative">
+	<div class="relative flex h-full flex-col">
 		{#if children}
 			{@render children()}
 		{/if}

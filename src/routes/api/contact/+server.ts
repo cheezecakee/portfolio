@@ -1,7 +1,7 @@
 import { RESEND_API_KEY } from '$env/static/private';
 import { json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
-import { FormSchema } from '$lib/components/DockMenu/contact/contact-schema.js';
+import { FormSchema } from '$lib/components/contact/contact-schema.js';
 import { Resend } from 'resend';
 
 const resend = new Resend(RESEND_API_KEY);

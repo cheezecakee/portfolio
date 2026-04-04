@@ -34,7 +34,7 @@
 	<!-- Title  -->
 	<div class="flex flex-col text-left">
 		<h1 class="w-full text-4xl font-bold">{title}</h1>
-		<div class="mt-2 flex w-full justify-start gap-3 text-sm text-white/50">
+		<div class="mt-2 flex w-full justify-start gap-3 text-sm text-foreground/50">
 			<span>{formatted}</span>
 			{#if tags.length}
 				<span>|</span>
@@ -56,10 +56,10 @@
 
 	<!-- Footer -->
 	<div class="flex justify-between">
-		<a href="/blog" class="text-sm text-white/40 hover:text-white/80">← Back to blog</a>
+		<a href="/blog" class="text-sm text-foreground/40 hover:text-foreground/80">← Back to blog</a>
 		<button
 			onclick={copyLink}
-			class="text-white/40 transition hover:text-white/80"
+			class="text-foreground/40 transition hover:text-foreground/80"
 			aria-label="Copy link"
 		>
 			{#if copied}

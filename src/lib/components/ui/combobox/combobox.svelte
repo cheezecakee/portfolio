@@ -39,17 +39,13 @@
 			</Button>
 		</Popover.Trigger>
 		<Popover.Content class="w-50 p-0" align="start">
-			<Command.Root class="bg-card-foreground">
-				<Command.Input placeholder={`Filter ${placeholder}...`} class="text-background" />
+			<Command.Root>
+				<Command.Input placeholder={`Filter ${placeholder}...`} />
 				<Command.List>
-					<Command.Empty class="text-background">No results found.</Command.Empty>
+					<Command.Empty>No results found.</Command.Empty>
 					<Command.Group>
 						{#each options as option (option.value)}
-							<Command.Item
-								value={option.value}
-								onSelect={() => handleOptionSelect(option.value)}
-								class=" text-background"
-							>
+							<Command.Item value={option.value} onSelect={() => handleOptionSelect(option.value)}>
 								{option.label}
 							</Command.Item>
 						{/each}

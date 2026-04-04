@@ -1,111 +1,114 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import gsap from 'gsap';
-	import { ScrollTrigger } from 'gsap/ScrollTrigger';
+	import { Timeline } from '$lib/components/timeline';
 	import { MorphingText } from '$lib/components/magic/morphing-text';
-	import { HomeSection, AboutSection, BlogSection } from '$lib/sections';
-	import ProjectsSection from '$lib/sections/projects.svelte';
-	import { useIsMobile } from '$lib/hooks/isMobile.svelte.js';
+	import { AboutSection, BlogSection, ProjectsSection } from '$lib/sections';
+
 	let { data } = $props();
 
-	let currentTitle = $state('Backend Developer');
+	let activeSection = $state(1);
+	let sectionProgress = $state(0);
 
-	const mobile = useIsMobile();
+	const sectionTitles = {
+		1: 'About',
+		2: 'Projects',
+		3: 'Blog'
+	} as const;
+	let currentTitle = $derived(sectionTitles[activeSection as 1 | 2 | 3]);
+
+	// update sectionProgress on scroll
+	function updateSectionProgress() {
+		const sectionId = activeSection === 1 ? 'about' : activeSection === 2 ? 'projects' : 'blog';
+		const section = document.getElementById(sectionId);
+		if (!section) return;
+
+		const rect = section.getBoundingClientRect();
+		const sectionTop = rect.top;
+		const sectionHeight = rect.height;
+		const viewportHeight = window.innerHeight;
+		const scrollOffset = -sectionTop;
+		// Avoid division by zero – if the section fits in the viewport, progress is 1 when active
+		const maxScroll = Math.max(0.001, sectionHeight - viewportHeight);
+		let progress = scrollOffset / maxScroll;
+		sectionProgress = Math.min(1, Math.max(0, progress));
+	}
 
 	onMount(() => {
-		gsap.registerPlugin(ScrollTrigger);
-		ScrollTrigger.defaults({ markers: true });
+		const sections = [
+			{ id: 'about', step: 1 },
+			{ id: 'projects', step: 2 },
+			{ id: 'blog', step: 3 }
+		];
 
-		const title = document.querySelector('.title');
-		const header = document.querySelector('header');
-		if (!title || !header) return;
-
-		const style = window.getComputedStyle(header);
-		const pl = parseFloat(style.paddingLeft);
-		const headerRect = header.getBoundingClientRect();
-
-		gsap.set('.title', {
-			position: 'fixed',
-			left: '50%',
-			top: '50%',
-			x: '-50%',
-			y: '-50%'
-		});
-
-		gsap.to('.title', {
-			scrollTrigger: {
-				trigger: '#home',
-				start: 'top top',
-				end: '+=400',
-				scrub: true,
-				markers: true
+		const observer = new IntersectionObserver(
+			(entries) => {
+				let maxRatio = 0;
+				let newActiveStep = activeSection;
+				for (const entry of entries) {
+					if (entry.intersectionRatio > 0.3 && entry.intersectionRatio > maxRatio) {
+						maxRatio = entry.intersectionRatio;
+						const section = sections.find((s) => s.id === entry.target.id);
+						if (section) newActiveStep = section.step;
+					}
+				}
+				if (newActiveStep !== activeSection && maxRatio > 0.5) {
+					activeSection = newActiveStep;
+				}
 			},
-			left: headerRect.left + pl + 'px',
-			top: headerRect.bottom + 'px',
-			x: 0,
-			y: 0,
-			duration: 1,
-			ease: 'none'
-		});
-
-		const panels = gsap.utils.toArray<HTMLElement>('.panel');
-
-		panels.forEach((panel, _i) => {
-			const innerpanel = panel.querySelector('.panel-content') as HTMLElement | null;
-			if (!innerpanel) return;
-
-			let scrollNeeded: number;
-			let spacing = false;
-			const panelHeight = innerpanel.scrollHeight;
-			const windowHeight = window.innerHeight;
-			const contentOverflow = panelHeight - windowHeight;
-			const pinOffset = windowHeight * 0.15;
-
-			if (mobile.current) {
-				scrollNeeded = contentOverflow + pinOffset;
-				spacing = true;
-			} else {
-				scrollNeeded = panel.scrollHeight;
+			{
+				threshold: [0, 0.3, 0.5, 0.7, 1],
+				rootMargin: '0px'
 			}
+		);
 
-			ScrollTrigger.create({
-				trigger: panel,
-				start: 'top 15%',
-				end: `+=${scrollNeeded}`,
-				pin: true,
-				// snap: 1,
-				pinSpacing: spacing,
-				markers: true
-			});
+		sections.forEach(({ id }) => {
+			const element = document.getElementById(id);
+			if (element) observer.observe(element);
 		});
+
+		// scroll listener and initial progress update
+		window.addEventListener('scroll', updateSectionProgress);
+		updateSectionProgress();
+
+		return () => {
+			observer.disconnect();
+			window.removeEventListener('scroll', updateSectionProgress);
+		};
+	});
+
+	$effect(() => {
+		updateSectionProgress();
 	});
 </script>
 
-<svelte:head>
-	<title>Cheezecake</title>
-	<meta
-		name="description"
-		content="Cheezecake's personal portfolio showcasing projects, and skills"
-	/>
-</svelte:head>
+<div class="flex min-h-screen">
+	<!-- Fixed left sidebar with timeline -->
+	<aside
+		class="tl fixed top-1/2 left-4 w-auto -translate-y-1/2 pr-5 md:left-8 lg:left-20 xl:left-32"
+	>
+		<Timeline bind:activeSection formData={data?.form} {sectionProgress} />
+	</aside>
 
-<div class="title-header fixed z-999 h-14 w-full bg-background md:h-18 lg:h-20"></div>
+	<div
+		class="heading fixed z-1000 mx-auto flex min-h-[8rem] w-full items-end bg-background px-21 py-2 md:px-35 lg:min-h-[9.25rem] lg:px-85"
+	>
+		<MorphingText texts={[currentTitle]} />
+	</div>
 
-<div class="title z-1000 bg-background">
-	<MorphingText texts={[currentTitle]} />
+	<!-- Scrollable main content – your existing classes untouched -->
+	<div
+		class="mx-auto flex w-full flex-col items-center space-y-10 px-16 pt-[8rem] md:px-30 lg:px-80 lg:pt-[9.25rem]"
+	>
+		<AboutSection
+			class="min-h-[calc(100vh-(9rem*1.2))] scroll-mt-[8rem] lg:min-h-[calc(100vh-(10.25rem*1.2))] lg:scroll-mt-[9.25rem]"
+		/>
+		<ProjectsSection
+			projects={data.projects}
+			meta={data.meta}
+			class="min-h-[calc(100vh-(9rem*1.2))] scroll-mt-[8rem] lg:min-h-[calc(100vh-(10.25rem*1.2))] lg:scroll-mt-[9.25rem]"
+		/>
+		<BlogSection
+			class="min-h-[calc(100vh-(9rem*2))] scroll-mt-[8rem] lg:min-h-[calc(100vh-(10.25rem*2))] lg:scroll-mt-[9.25rem]"
+		/>
+	</div>
 </div>
-
-<!-- <div id="container" class="flex h-full w-full flex-col place-items-center"> -->
-<div class="panel">
-	<HomeSection />
-</div>
-<div class="panel">
-	<AboutSection />
-</div>
-<div class="panel">
-	<ProjectsSection projects={data.projects} meta={data.meta} />
-</div>
-<div class="panel">
-	<BlogSection />
-</div>
-<!-- </div> -->

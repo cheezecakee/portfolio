@@ -29,7 +29,7 @@ export interface ProcessedProject {
 	updatedAt: Date;
 }
 
-// Featured projects list - edit this array to control which projects are displayed
+// Featured projects list
 const FEATURED_PROJECTS = [
 	'boba',
 	'mpris-daemon',

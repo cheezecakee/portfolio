@@ -20,7 +20,11 @@ const config = {
             },
         })
     ],
-	kit: { adapter: adapter() }
+    kit: {
+        adapter: adapter({
+            runtime: 'nodejs22.x'
+        })
+    }
 };
 
 export default config;

@@ -1,9 +1,10 @@
 <script lang="ts">
-	import BentoGrid from '$lib/components/BentoGrid/BentoGrid.svelte';
+	import { BentoGrid, BlogArchiveCard, BlogLatestCard } from '$lib/components/bento-grid';
 	import { getPosts } from '$lib/blog/parser';
-	import LatestCard from '$lib/components/BlogCards/latest-card.svelte';
 	import { useIsMobile } from '$lib/hooks/isMobile.svelte';
-	import Archive from '$lib/components/BlogCards/archive.svelte';
+	import { cn } from '$lib/utils';
+
+	let { class: className }: { class?: string } = $props();
 
 	const posts = getPosts();
 	const mobile = useIsMobile();
@@ -67,10 +68,7 @@
 	<meta name="description" content="" />
 </svelte:head>
 
-<div
-	id="blog"
-	class="panel-content mx-auto flex min-h-[90vh] w-full bg-background px-5 pt-6 md:px-30 lg:px-80"
->
+<div id="blog" class={cn('mx-auto flex w-full items-center', className)}>
 	<BentoGrid class="w-full justify-between gap-6 px-5">
 		<!-- Left column: Latest posts -->
 		<div class="col-span-1 flex flex-col">
@@ -81,11 +79,11 @@
 				</div>
 				{#if mobile.current}
 					{#each posts.slice(0, 1) as post}
-						<LatestCard {post} />
+						<BlogLatestCard {post} />
 					{/each}
 				{:else}
 					{#each posts.slice(0, 3) as post}
-						<LatestCard {post} />
+						<BlogLatestCard {post} />
 					{/each}
 				{/if}
 			</div>
@@ -93,7 +91,7 @@
 
 		<!-- Right column: Archive + filters -->
 		<div class="col-span-1 flex items-start justify-center">
-			<Archive {years} {tags} bind:selectedYear bind:selectedTags {archive} />
+			<BlogArchiveCard {years} {tags} bind:selectedYear bind:selectedTags {archive} />
 		</div>
 	</BentoGrid>
 </div>
