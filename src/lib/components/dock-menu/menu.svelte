@@ -1,6 +1,6 @@
 <script lang="ts">
 	import {
-		ArticleIcon,
+		NewspaperIcon,
 		CodeIcon,
 		GithubLogoIcon,
 		LinkedinLogoIcon,
@@ -30,7 +30,7 @@
 		navbar: [
 			{ label: 'About', icon: UserIcon, type: 'page' },
 			{ label: 'Projects', icon: CodeIcon, type: 'page' },
-			{ label: 'Blog', icon: ArticleIcon, type: 'page' }
+			{ label: 'Blog', icon: NewspaperIcon, type: 'page' }
 		],
 		contact: [
 			{ label: 'Email', icon: ChatTextIcon, href: NavURL.EMAIL_URL, type: 'modal' },

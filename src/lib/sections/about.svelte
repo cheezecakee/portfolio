@@ -11,7 +11,7 @@
 
 	const aboutDescription =
 		"Hello! I'm Anabel a self-taught software developer whose curiosity turned into a passion for building the invisible infrastructure that makes applications work. I love building tools in Golang that help create and enhance workflow.\n\n" +
-		"Currently I'm building a TUI framework built on Bubble Tea, you can follow that journey on my blog(links to blog).\n\n" +
+		"Currently I'm building a TUI framework built on Bubble Tea, you can follow that journey on my blog down below.\n\n" +
 		"I'm early in my career and hungry to learn. If you have any questions I would love to chat.";
 </script>
 
