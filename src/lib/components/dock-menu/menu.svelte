@@ -14,6 +14,7 @@
 	import DockIcon from './dock-icon.svelte';
 	import type { Navs, NavItem, PageNav } from '$lib/types';
 	import * as NavURL from '$lib/constants/navigation';
+	import { goto } from '$app/navigation';
 
 	interface Props {
 		data?: { form: any };
@@ -39,6 +40,12 @@
 		]
 	};
 
+	const sectionToHash: Record<string, string> = {
+		About: NavURL.NAV_ABOUT,
+		Projects: NavURL.NAV_PROJECTS,
+		Blog: NavURL.NAV_BLOG
+	};
+
 	function isActiveNavItem(item: NavItem): boolean {
 		return isPageNav(item) && item.label === currentSection;
 	}
@@ -48,11 +55,9 @@
 
 	function handleNavigationClick(item: NavItem) {
 		if (item.type === 'page') {
-			// Scroll to section instead of navigating to URL
-			const sectionId = item.label.toLowerCase();
-			const element = document.getElementById(sectionId);
-			if (element) {
-				element.scrollIntoView({ behavior: 'smooth' });
+			const hashUrl = sectionToHash[item.label];
+			if (hashUrl) {
+				goto(hashUrl);
 			}
 		} else if (item.type === 'external') {
 			window.open(item.href, '_blank', 'noopener,noreferrer');
@@ -152,4 +157,4 @@
 	</div>
 </Tooltip.Provider>
 
-<ContactModal bind:open={isContactModalOpen} {data} />
+<ContactModal bind:open={isContactModalOpen} data={data ?? { form: null }} />
