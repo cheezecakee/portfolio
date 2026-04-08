@@ -6,7 +6,7 @@ tags: ["go", "tui"]
 date: 2026-03-20
 ---
 
-This project was actually an accident, it was never meant to be a mini framework but as I added more features it became it's own standalone project. I was building a cli quiz game, everything was going well. I had a working game engine, scoring system and everything setup, but when it came time build the UI I was completely demotivated. Like every frontend design you have to read hundreds of styling options and themes to know how to align a single box on the screen, and to make matters worse endless boilerplate.
+This project was actually an accident, it was never meant to be a mini framework but as I added more features it became its own standalone project. I was building a cli quiz game, everything was going well. I had a working game engine, scoring system and everything setup, but when it came time build the UI I was completely demotivated. Like every frontend design you have to read hundreds of styling options and themes to know how to align a single box on the screen, and to make matters worse endless boilerplate.
 
 If you're anything like me and love automation games, the first thing that comes to mind when looking at all the boilerplate you have to "produce" is, how can I automate this? 
 Just like any automation game, one simple output isn't enough, must increase production as efficiently as possible. 
@@ -23,7 +23,7 @@ Bubble Tea works the exact same way, along with Bubble Tea there are a few more 
 
 While there are more libraries these are the other two main libraries that work along Bubble Tea to create most TUIs. 
 
-Now that we have a general idea of how Bubble Tea works, let's get to the framework. Eveything in Bubble Tea works through the Update() with something called Msg, Msg can be of anytype and inside Update you decide what each type does. An example that Bubble Tea shows is this:
+Now that we have a general idea of how Bubble Tea works, let's get to the framework. Eveything in Bubble Tea works through the Update() with something called Msg, Msg can be of any type and inside Update you decide what each type does. An example that Bubble Tea shows is this:
 
 ```go
 func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
@@ -107,7 +107,7 @@ func (a *App) View() tea.View {
 	return a.current.View()
 }
 ```
-I even added some history so that you could navigate back, and forth and all you really need was to create the normal Bubble Tea model like this:
+I even added some history so that you could navigate back, and forth and all you really need was to create the normal Bubble Tea model like this with they only catch being that you return a screen interface instead of the `tea.Model`:
 ```go 
 type Home struct {}
 

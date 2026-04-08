@@ -1,5 +1,8 @@
 <script lang="ts">
 	import '../app.css';
+	// import { MoonIcon, SunIcon } from 'phosphor-svelte';
+	import '$lib/assets/themes/mocha.css';
+	// import latte from '$lib/assets/themes/latte.css?url';
 	import favicon from '$lib/assets/favicon.svg';
 	import { DockMenu } from '$lib/components/dock-menu';
 	import { Toaster } from '$lib/components/ui/sonner';
@@ -13,6 +16,16 @@
 	let isBlogPost = $derived(page.url.pathname.startsWith('/blog/'));
 	let activeSection = $state('About');
 
+	// let theme = $state('dark'); // default matches body class="dark"
+	// let themeLink: HTMLLinkElement | null = null;
+
+	// function toggleTheme() {
+	// 	theme = theme === 'dark' ? 'light' : 'dark';
+	// 	if (themeLink) {
+	// 		themeLink.href = theme === 'dark' ? mocha : latte;
+	// 	}
+	// }
+
 	onMount(() => {
 		const sections = ['about', 'projects', 'blog'];
 		const sectionTitles: Record<string, string> = {
@@ -20,6 +33,15 @@
 			projects: 'Projects',
 			blog: 'Blog'
 		};
+
+		// themeLink = document.querySelector('#blog-post');
+		// if (!themeLink) {
+		// 	themeLink = document.createElement('link');
+		// 	themeLink.id = 'blog-theme';
+		// 	themeLink.rel = 'stylesheet';
+		// 	themeLink.href = theme === 'dark' ? mocha : latte;
+		// 	document.head.appendChild(themeLink);
+		// }
 
 		const observer = new IntersectionObserver(
 			(entries) => {
@@ -84,8 +106,16 @@
 		</div>
 	{:else}
 		<div
-			class="md:min-h-header-height-md fixed top-0 z-50 mx-auto flex min-h-header-height-sm w-full items-center justify-between bg-linear-to-t from-transparent via-background to-background px-10 py-5 md:px-35 lg:min-h-header-height lg:px-85"
-		></div>
+			class="md:min-h-header-height-md fixed top-0 z-50 mx-auto flex min-h-header-height-sm w-full items-center justify-end bg-linear-to-t from-transparent via-background to-background px-10 py-5 md:px-35 lg:min-h-header-height lg:px-85"
+		>
+			<!-- <button onclick={toggleTheme} class="rounded p-2 hover:bg-white/10"> -->
+			<!-- 	{#if theme === 'dark'} -->
+			<!-- 		<SunIcon size={20} /> -->
+			<!-- 	{:else} -->
+			<!-- 		<MoonIcon size={20} /> -->
+			<!-- 	{/if} -->
+			<!-- </button> -->
+		</div>
 	{/if}
 
 	<!-- Main -->

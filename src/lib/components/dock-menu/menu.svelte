@@ -99,6 +99,7 @@
 						{#snippet children(isHovered, iconIsActive)}
 							<Tooltip.Root>
 								<Tooltip.Trigger
+									aria-label={navItem.label}
 									class={`flex h-full w-full items-center justify-center transition-all duration-200
 		${
 			isHovered
@@ -134,6 +135,7 @@
 						{#snippet children(isHovered, iconIsActive)}
 							<Tooltip.Root>
 								<Tooltip.Trigger
+									aria-label={contactItem.label}
 									class={`flex h-full w-full items-center justify-center transition-all duration-200
 		${
 			isHovered

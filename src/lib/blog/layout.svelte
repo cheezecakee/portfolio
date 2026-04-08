@@ -46,7 +46,7 @@
 </svelte:head>
 
 <article
-	class="mx-auto flex min-h-[calc(100dvh-var(--header-height))] flex-col space-y-6 px-5 md:min-h-[calc(100dvh-var(--header-height-md))] md:px-30 lg:px-80"
+	class="blog-post mx-auto flex min-h-[calc(100dvh-var(--header-height))] flex-col space-y-6 px-5 md:min-h-[calc(100dvh-var(--header-height-md))]"
 >
 	<!-- Title  -->
 	<div class="flex flex-col text-left">

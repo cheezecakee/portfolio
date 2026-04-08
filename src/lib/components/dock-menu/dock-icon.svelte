@@ -95,6 +95,7 @@
 	data-dock-icon={label}
 	role="button"
 	tabindex="0"
+	aria-label={label}
 	onmouseenter={handleMouseEnter}
 	onmouseleave={handleMouseLeave}
 >
