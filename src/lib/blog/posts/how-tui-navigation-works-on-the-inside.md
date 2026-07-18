@@ -55,7 +55,7 @@ Let's start implementing and I'll explain as we go, the first part:
         defer term.Restore(int(os.Stdin.Fd()), oldState)
 
         for running {
-            fmt.Print("\rPress any key: ")
+            fmt.Print("\\rPress any key: ")
 
             b := make([]byte, 1)
             _, err = os.Stdin.Read(b)
@@ -64,15 +64,15 @@ Let's start implementing and I'll explain as we go, the first part:
             }
 
             if b[0] == 113 { // quit
-                fmt.Print("\n\rExiting\r\n")
+                fmt.Print("\\n\\rExiting\\r\\n")
                 running = false
                 break
             }
 
-            fmt.Printf("\n\rYou pressed: %q (ASCII: %d) \n", b[0], b[0])
+            fmt.Printf("\\n\\rYou pressed: %q (ASCII: %d) \\n", b[0], b[0])
         }
 
-        fmt.Print("\r\n")
+        fmt.Print("\\r\\n")
     }
 ```
 
@@ -129,8 +129,8 @@ For the next part:
 
         defer term.Restore(int(os.Stdin.Fd()), oldState)
 
-        fmt.Print("\033[?25l")
-        defer fmt.Print("\033[?25h")
+        fmt.Print("\\033[?25l")
+        defer fmt.Print("\\033[?25h")
 
         for running {
             for i, option := range menu {
@@ -139,10 +139,10 @@ For the next part:
                 } else {
                     fmt.Printf(" %s  ", option)
                 }
-                fmt.Print("\033[K")
+                fmt.Print("\\033[K")
             }
 
-            fmt.Print("\r")
+            fmt.Print("\\r")
 
             b := make([]byte, 1)
             _, err = os.Stdin.Read(b)
@@ -153,7 +153,7 @@ For the next part:
             // detect key press
             switch b[0] {
             case 113: // quit
-                fmt.Print("\n\rExiting\r\n")
+                fmt.Print("\\n\\rExiting\\r\\n")
                 running = false
                 continue
             case 104: // left
@@ -167,7 +167,7 @@ For the next part:
             }
 
         }
-        fmt.Print("\r\n")
+        fmt.Print("\\r\\n")
     }
 ```
 
@@ -176,8 +176,8 @@ will help us keep track of our position in the terminal when navigating. I then 
 options to be displayed in the TUI. This snippet of random characters:
 
 ```go
-    fmt.Print("\033[?25l")
-    defer fmt.Print("\033[?25h")
+    fmt.Print("\\033[?25l")
+    defer fmt.Print("\\033[?25h")
 ```
 
 is just another ANSI escape sequence, but this one tells the terminal to hide the cursor that you usually see, 
@@ -191,7 +191,7 @@ done running. The fun part actually comes from two snippets, the first one is th
         } else {
             fmt.Printf(" %s  ", option)
         }
-        fmt.Print("\033[K")
+        fmt.Print("\\033[K")
     }
 ```
 
@@ -206,11 +206,11 @@ it. This gives us a nice looking cursor to indicate which option we are hovering
 You can change the look of your cursor to any character you want, another common one is `>`. To get the nice 
 asymmetrical look we have, notice how I added some extra spacing around the printed options. This compensates for the 
 cursor space when it moves to that option. It removes the weird text shift that would be there without it.
-The next piece is the ANSI escape sequence `\033[K`, which clears everything from the cursor to the end of the current 
+The next piece is the ANSI escape sequence `\\033[K`, which clears everything from the cursor to the end of the current 
 line. Without it, characters from the previous render would remain on the screen if the newly rendered line happened to 
 be shorter.
-Lastly, `fmt.Print("\r")` is what allows us to redraw the menu in the same place. Terminals work by writing characters 
-from the current terminal cursor position forward, they don't automatically replace the previous output. `\r` moves the 
+Lastly, `fmt.Print("\\r")` is what allows us to redraw the menu in the same place. Terminals work by writing characters 
+from the current terminal cursor position forward, they don't automatically replace the previous output. `\\r` moves the 
 cursor back to the beginning of the line, allowing us to overwrite the previous render with the updated menu. Without it, 
 every cursor movement would just print a new menu after the previous one, quickly making the output unreadable.
 
@@ -221,7 +221,7 @@ For the cursor movement we circle back to the same approach we used with the exi
     // detect key press
     switch b[0] {
     case 113: // quit
-        fmt.Print("\n\rExiting\r\n")
+        fmt.Print("\\n\\rExiting\\r\\n")
         running = false
         continue
     case 104: // left
